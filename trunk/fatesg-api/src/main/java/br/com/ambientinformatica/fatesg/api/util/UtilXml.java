@@ -11,7 +11,7 @@ public class UtilXml {
    static{
       xstream = new XStream();
       xstream.alias("pessoa", Pessoa.class);
-      xstream.alias("erro", ErroAgent.class);
+      xstream.alias("erro", ErroFatesgAPI.class);
    }
    
    public static XStream getXStreamInstance(){
@@ -30,7 +30,7 @@ public class UtilXml {
    }
    
    public static String toXmlErro(Throwable t){
-      ErroAgent erro = new ErroAgent(t);
+      ErroFatesgAPI erro = new ErroFatesgAPI(t);
       erro.setMensagem(t.getMessage());
       String xml = xstream.toXML(erro); 
 //      System.out.println("\n\n\n" + xml + "\n------------------------------------\n\n\n");

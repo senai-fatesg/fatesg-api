@@ -1,17 +1,17 @@
 package br.com.ambientinformatica.fatesg.api.util;
 
 
-public class ErroAgent {
+public class ErroFatesgAPI {
 
    private String mensagem;
    
    private String stackTrace;
    
-   public ErroAgent() {
+   public ErroFatesgAPI() {
 
    }
    
-   public ErroAgent(Throwable t) {
+   public ErroFatesgAPI(Throwable t) {
       this.stackTrace = UtilException.lerException(t);
    }
 
