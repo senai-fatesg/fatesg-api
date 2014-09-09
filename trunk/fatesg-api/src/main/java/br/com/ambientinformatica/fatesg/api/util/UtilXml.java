@@ -1,0 +1,39 @@
+package br.com.ambientinformatica.fatesg.api.util;
+
+import br.com.ambientinformatica.fatesg.api.Pessoa;
+
+import com.thoughtworks.xstream.XStream;
+
+public class UtilXml {
+
+   private static XStream xstream;
+
+   static{
+      xstream = new XStream();
+      xstream.alias("pessoa", Pessoa.class);
+      xstream.alias("erro", ErroAgent.class);
+   }
+   
+   public static XStream getXStreamInstance(){
+      return xstream;
+   }
+   
+   public static Object fromXml(String xml){
+//      System.out.println("\n\n\n" + xml + "\n------------------------------------\n\n\n");
+      return xstream.fromXML(xml);
+   }
+   
+   public static String toXml(Object obj){
+      String xml = xstream.toXML(obj);
+//      System.out.println("\n\n\n" + xml + "\n------------------------------------\n\n\n");
+      return xml;
+   }
+   
+   public static String toXmlErro(Throwable t){
+      ErroAgent erro = new ErroAgent(t);
+      erro.setMensagem(t.getMessage());
+      String xml = xstream.toXML(erro); 
+//      System.out.println("\n\n\n" + xml + "\n------------------------------------\n\n\n");
+      return xml; 
+   }
+}
