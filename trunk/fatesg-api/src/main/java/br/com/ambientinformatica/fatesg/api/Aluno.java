@@ -17,8 +17,8 @@ public class Aluno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "pessoa_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "pessoa_seq", sequenceName = "pessoa_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(generator = "aluno_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "aluno_seq", sequenceName = "aluno_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 
 	private String nome;
