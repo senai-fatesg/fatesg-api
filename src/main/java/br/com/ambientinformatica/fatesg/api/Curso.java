@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Curso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Column(unique = true)
-	private String codigo;
+	private String id;
 	
 	@Enumerated(EnumType.STRING)
 	private EnumDescricaoCurso descricao;
@@ -37,12 +39,12 @@ public class Curso implements Serializable{
 	@OneToMany
 	Matriz matriz;
 
-	public String getCodigo() {
-		return codigo;
+	public String getId() {
+		return id;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public EnumDescricaoCurso getDescricao() {
@@ -109,18 +111,27 @@ public class Curso implements Serializable{
 		this.dtTermino = dtTermino;
 	}
 
+	public Matriz getMatriz() {
+		return matriz;
+	}
+
+	public void setMatriz(Matriz matriz) {
+		this.matriz = matriz;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + cargaHoraria;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result
 				+ ((dtInicio == null) ? 0 : dtInicio.hashCode());
 		result = prime * result
 				+ ((dtTermino == null) ? 0 : dtTermino.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((matriz == null) ? 0 : matriz.hashCode());
 		result = prime * result
 				+ ((modalidade == null) ? 0 : modalidade.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -140,11 +151,6 @@ public class Curso implements Serializable{
 		Curso other = (Curso) obj;
 		if (cargaHoraria != other.cargaHoraria)
 			return false;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
 		if (descricao != other.descricao)
 			return false;
 		if (dtInicio == null) {
@@ -156,6 +162,16 @@ public class Curso implements Serializable{
 			if (other.dtTermino != null)
 				return false;
 		} else if (!dtTermino.equals(other.dtTermino))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (matriz == null) {
+			if (other.matriz != null)
+				return false;
+		} else if (!matriz.equals(other.matriz))
 			return false;
 		if (modalidade != other.modalidade)
 			return false;
@@ -173,5 +189,7 @@ public class Curso implements Serializable{
 			return false;
 		return true;
 	}
+    
 	
 }
+	
