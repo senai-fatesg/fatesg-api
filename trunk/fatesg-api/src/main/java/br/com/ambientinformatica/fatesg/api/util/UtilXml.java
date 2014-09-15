@@ -1,6 +1,6 @@
 package br.com.ambientinformatica.fatesg.api.util;
 
-import br.com.ambientinformatica.fatesg.api.Pessoa;
+import br.com.ambientinformatica.fatesg.api.Aluno;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -10,7 +10,7 @@ public class UtilXml {
 
    static{
       xstream = new XStream();
-      xstream.alias("pessoa", Pessoa.class);
+      xstream.alias("pessoa", Aluno.class);
       xstream.alias("erro", ErroFatesgAPI.class);
    }
    

@@ -1,7 +1,7 @@
 package br.com.ambientinformatica.fatesg.api;
 
-public enum EnumStatusAluno {
+public enum EnumTipoSexo {
 
-	Ativo,
-	Inativo;
+	Masculino,
+	Feminino;
 }
