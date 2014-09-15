@@ -82,6 +82,14 @@ public class Instituicao implements Serializable {
 		this.descricao = descricao;
 	}
 
+	public UnidadeEnsino getUnidadeDeEnsino() {
+		return unidadeDeEnsino;
+	}
+
+	public void setUnidadeDeEnsino(UnidadeEnsino unidadeDeEnsino) {
+		this.unidadeDeEnsino = unidadeDeEnsino;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

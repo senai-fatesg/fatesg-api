@@ -3,8 +3,10 @@ package br.com.ambientinformatica.fatesg.api;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Disciplina implements Serializable{
 
 	/**

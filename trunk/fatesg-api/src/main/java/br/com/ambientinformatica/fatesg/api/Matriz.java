@@ -3,12 +3,13 @@ package br.com.ambientinformatica.fatesg.api;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+@Entity
 public class Matriz implements Serializable {
 
 	private static final long serialVersionUID = 1L;
