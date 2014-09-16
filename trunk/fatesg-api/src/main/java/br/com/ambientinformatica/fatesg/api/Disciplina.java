@@ -21,9 +21,6 @@ public class Disciplina implements Serializable{
 	
 	private int cargaHoraria;
 	
-	@OneToOne
-    PlanoDeEnsino planoDeEnsino;
-
 	public String getCodigo() {
 		return codigo;
 	}
