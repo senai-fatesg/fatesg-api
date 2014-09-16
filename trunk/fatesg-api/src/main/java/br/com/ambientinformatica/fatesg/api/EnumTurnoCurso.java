@@ -4,5 +4,6 @@ public enum EnumTurnoCurso {
 
 	Matutino,
 	Vespertino,
-	Noturno;
+	Noturno,
+	Integral
 }

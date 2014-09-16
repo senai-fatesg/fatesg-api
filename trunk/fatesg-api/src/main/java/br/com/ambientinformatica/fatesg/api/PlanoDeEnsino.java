@@ -1,11 +1,14 @@
 package br.com.ambientinformatica.fatesg.api;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -31,48 +34,23 @@ public class PlanoDeEnsino implements Serializable{
 	
 	private String bibliografia;
 	
-	@OneToMany
-	Avaliacao avaliacao;
-	
-	@OneToMany
-	CronogramaAula cronogramaAula;
-	
 	@OneToOne
-	Disciplina disciplina;
+	@JoinColumn(name="id_disciplina") 
+	private Disciplina disciplina; 
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeEnsino")
+	private List<Avaliacao> avaliacoes;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeEnsino")
+	private List<CronogramaAula> cronogramas;
 
 	public Long getId() {
 		return id;
 	}
 
-	public Avaliacao getAvaliacao() {
-		return avaliacao;
+	public void setId(Long id) {
+		this.id = id;
 	}
-
-
-	public void setAvaliacao(Avaliacao avaliacao) {
-		this.avaliacao = avaliacao;
-	}
-
-
-	public CronogramaAula getCronogramaAula() {
-		return cronogramaAula;
-	}
-
-
-	public void setCronogramaAula(CronogramaAula cronogramaAula) {
-		this.cronogramaAula = cronogramaAula;
-	}
-
-
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
-
-
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
-	}
-
 
 	public String getCompetencia() {
 		return competencia;
@@ -111,17 +89,11 @@ public class PlanoDeEnsino implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((avaliacao == null) ? 0 : avaliacao.hashCode());
-		result = prime * result
 				+ ((baseTecnologica == null) ? 0 : baseTecnologica.hashCode());
 		result = prime * result
 				+ ((bibliografia == null) ? 0 : bibliografia.hashCode());
 		result = prime * result
 				+ ((competencia == null) ? 0 : competencia.hashCode());
-		result = prime * result
-				+ ((cronogramaAula == null) ? 0 : cronogramaAula.hashCode());
-		result = prime * result
-				+ ((disciplina == null) ? 0 : disciplina.hashCode());
 		result = prime * result
 				+ ((habilidade == null) ? 0 : habilidade.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -137,11 +109,6 @@ public class PlanoDeEnsino implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PlanoDeEnsino other = (PlanoDeEnsino) obj;
-		if (avaliacao == null) {
-			if (other.avaliacao != null)
-				return false;
-		} else if (!avaliacao.equals(other.avaliacao))
-			return false;
 		if (baseTecnologica == null) {
 			if (other.baseTecnologica != null)
 				return false;
@@ -157,16 +124,6 @@ public class PlanoDeEnsino implements Serializable{
 				return false;
 		} else if (!competencia.equals(other.competencia))
 			return false;
-		if (cronogramaAula == null) {
-			if (other.cronogramaAula != null)
-				return false;
-		} else if (!cronogramaAula.equals(other.cronogramaAula))
-			return false;
-		if (disciplina == null) {
-			if (other.disciplina != null)
-				return false;
-		} else if (!disciplina.equals(other.disciplina))
-			return false;
 		if (habilidade == null) {
 			if (other.habilidade != null)
 				return false;
@@ -179,5 +136,7 @@ public class PlanoDeEnsino implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
 
 }
