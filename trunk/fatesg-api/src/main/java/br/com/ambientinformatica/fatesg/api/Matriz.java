@@ -37,7 +37,6 @@ public class Matriz implements Serializable {
 	private int qtdPeriodos;
 	
 	@ManyToOne
-	@JoinColumn(name = "IDF_CURSO")
 	private Curso curso;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})

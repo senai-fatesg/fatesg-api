@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 public class Avaliacao implements Serializable {
 
 	/**
-	 * author Glaicon Reis
+	 * @author Glaicon Reis
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -30,7 +30,6 @@ public class Avaliacao implements Serializable {
 	private String observacao;
 
 	@ManyToOne
-	@JoinColumn(name = "IDF_PLANOENSINO")
 	private PlanoDeEnsino planoDeEnsino;
 
 	public String getTipo() {
