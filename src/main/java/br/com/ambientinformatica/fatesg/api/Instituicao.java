@@ -24,7 +24,7 @@ public class Instituicao implements Serializable {
 	
 	private String razaoSocial;
 	
-	private String inscricaoSocial;
+	private String inscricaoEstadual;
 	
 	@Column(unique = true)
 	private Long cnpj;
@@ -37,11 +37,7 @@ public class Instituicao implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getNomeFantazia() {
 		return nomeFantazia;
 	}
@@ -57,13 +53,13 @@ public class Instituicao implements Serializable {
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
-
-	public String getInscricaoSocial() {
-		return inscricaoSocial;
+	
+	public String getInscricaoEstadual() {
+		return inscricaoEstadual;
 	}
 
-	public void setInscricaoSocial(String inscricaoSocial) {
-		this.inscricaoSocial = inscricaoSocial;
+	public void setInscricaoEstadual(String inscricaoEstadual) {
+		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
 	public Long getCnpj() {
@@ -98,12 +94,16 @@ public class Instituicao implements Serializable {
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((inscricaoSocial == null) ? 0 : inscricaoSocial.hashCode());
+		result = prime
+				* result
+				+ ((inscricaoEstadual == null) ? 0 : inscricaoEstadual
+						.hashCode());
 		result = prime * result
 				+ ((nomeFantazia == null) ? 0 : nomeFantazia.hashCode());
 		result = prime * result
 				+ ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
+		result = prime * result
+				+ ((unidadeDeEnsino == null) ? 0 : unidadeDeEnsino.hashCode());
 		return result;
 	}
 
@@ -131,10 +131,10 @@ public class Instituicao implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (inscricaoSocial == null) {
-			if (other.inscricaoSocial != null)
+		if (inscricaoEstadual == null) {
+			if (other.inscricaoEstadual != null)
 				return false;
-		} else if (!inscricaoSocial.equals(other.inscricaoSocial))
+		} else if (!inscricaoEstadual.equals(other.inscricaoEstadual))
 			return false;
 		if (nomeFantazia == null) {
 			if (other.nomeFantazia != null)
@@ -146,10 +146,12 @@ public class Instituicao implements Serializable {
 				return false;
 		} else if (!razaoSocial.equals(other.razaoSocial))
 			return false;
+		if (unidadeDeEnsino == null) {
+			if (other.unidadeDeEnsino != null)
+				return false;
+		} else if (!unidadeDeEnsino.equals(other.unidadeDeEnsino))
+			return false;
 		return true;
 	}
 	
-	
-	
-
 }
