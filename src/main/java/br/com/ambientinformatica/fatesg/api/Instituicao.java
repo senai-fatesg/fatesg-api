@@ -1,9 +1,10 @@
 package br.com.ambientinformatica.fatesg.api;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,30 +21,25 @@ public class Instituicao implements Serializable {
 	@SequenceGenerator(name = "instituicao_seq", sequenceName = "instituicao_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 	
-	private String nomeFantazia;
+	private String nomeFantasia;
 	
 	private String razaoSocial;
 	
 	private String inscricaoEstadual;
 	
-	@Column(unique = true)
-	private Long cnpj;
+	private String cnpj;
 	
 	private String descricao;
-	
-	@OneToMany
-	UnidadeEnsino unidadeDeEnsino;
+		
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucao")
+	private List<UnidadeEnsino> unidades;
 
-	public Long getId() {
-		return id;
-	}
-	
-	public String getNomeFantazia() {
-		return nomeFantazia;
+	public String getNomeFantasia() {
+		return nomeFantasia;
 	}
 
-	public void setNomeFantazia(String nomeFantazia) {
-		this.nomeFantazia = nomeFantazia;
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getRazaoSocial() {
@@ -53,7 +49,7 @@ public class Instituicao implements Serializable {
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
-	
+
 	public String getInscricaoEstadual() {
 		return inscricaoEstadual;
 	}
@@ -62,11 +58,11 @@ public class Instituicao implements Serializable {
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
-	public Long getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Long cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
@@ -78,12 +74,16 @@ public class Instituicao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public UnidadeEnsino getUnidadeDeEnsino() {
-		return unidadeDeEnsino;
+	public List<UnidadeEnsino> getUnidades() {
+		return unidades;
 	}
 
-	public void setUnidadeDeEnsino(UnidadeEnsino unidadeDeEnsino) {
-		this.unidadeDeEnsino = unidadeDeEnsino;
+	public void setUnidades(List<UnidadeEnsino> unidades) {
+		this.unidades = unidades;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	@Override
@@ -99,11 +99,11 @@ public class Instituicao implements Serializable {
 				+ ((inscricaoEstadual == null) ? 0 : inscricaoEstadual
 						.hashCode());
 		result = prime * result
-				+ ((nomeFantazia == null) ? 0 : nomeFantazia.hashCode());
+				+ ((nomeFantasia == null) ? 0 : nomeFantasia.hashCode());
 		result = prime * result
 				+ ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
 		result = prime * result
-				+ ((unidadeDeEnsino == null) ? 0 : unidadeDeEnsino.hashCode());
+				+ ((unidades == null) ? 0 : unidades.hashCode());
 		return result;
 	}
 
@@ -136,22 +136,22 @@ public class Instituicao implements Serializable {
 				return false;
 		} else if (!inscricaoEstadual.equals(other.inscricaoEstadual))
 			return false;
-		if (nomeFantazia == null) {
-			if (other.nomeFantazia != null)
+		if (nomeFantasia == null) {
+			if (other.nomeFantasia != null)
 				return false;
-		} else if (!nomeFantazia.equals(other.nomeFantazia))
+		} else if (!nomeFantasia.equals(other.nomeFantasia))
 			return false;
 		if (razaoSocial == null) {
 			if (other.razaoSocial != null)
 				return false;
 		} else if (!razaoSocial.equals(other.razaoSocial))
 			return false;
-		if (unidadeDeEnsino == null) {
-			if (other.unidadeDeEnsino != null)
+		if (unidades == null) {
+			if (other.unidades != null)
 				return false;
-		} else if (!unidadeDeEnsino.equals(other.unidadeDeEnsino))
+		} else if (!unidades.equals(other.unidades))
 			return false;
 		return true;
-	}
-	
+	}		
+
 }

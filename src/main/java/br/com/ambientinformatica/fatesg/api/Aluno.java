@@ -1,14 +1,21 @@
 package br.com.ambientinformatica.fatesg.api;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -54,6 +61,18 @@ public class Aluno implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumStatusAluno status;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinTable(name= "aluno_cursa", 
+	joinColumns = @JoinColumn(name = "id_aluno"), 
+	inverseJoinColumns = @JoinColumn(name="id_curso"))
+	private List<Curso> cursos = new ArrayList<Curso>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinTable(name= "aluno_disciplina", 
+	joinColumns = @JoinColumn(name = "id_aluno"), 
+	inverseJoinColumns = @JoinColumn(name="id_disciplina"))
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	
 	public String getNome() {
 		return nome;
 	}

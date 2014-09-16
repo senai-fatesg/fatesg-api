@@ -9,7 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class CronogramaAula implements Serializable {
@@ -30,14 +34,15 @@ public class CronogramaAula implements Serializable {
 	
 	private int horasAulas;
 	
-	private Date date;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data = new Date();
 	
 	@Enumerated(EnumType.STRING)
 	private EnumRecurso recurso;
 
-	public Long getId() {
-		return id;
-	}
+	@ManyToOne
+	@JoinColumn(name = "IDF_PLANOENSINO")
+	private PlanoDeEnsino planoDeEnsino;
 
 	public int getAula() {
 		return aula;
@@ -63,20 +68,28 @@ public class CronogramaAula implements Serializable {
 		this.horasAulas = horasAulas;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getData() {
+		return data;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public PlanoDeEnsino getPlanoDeEnsino() {
+		return planoDeEnsino;
+	}
+
+	public void setPlanoDeEnsino(PlanoDeEnsino planoDeEnsino) {
+		this.planoDeEnsino = planoDeEnsino;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public EnumRecurso getRecurso() {
 		return recurso;
-	}
-
-	public void setRecurso(EnumRecurso recurso) {
-		this.recurso = recurso;
 	}
 
 	@Override
@@ -88,9 +101,11 @@ public class CronogramaAula implements Serializable {
 				* result
 				+ ((conteudoProgramatico == null) ? 0 : conteudoProgramatico
 						.hashCode());
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + horasAulas;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((planoDeEnsino == null) ? 0 : planoDeEnsino.hashCode());
 		result = prime * result + ((recurso == null) ? 0 : recurso.hashCode());
 		return result;
 	}
@@ -111,10 +126,10 @@ public class CronogramaAula implements Serializable {
 				return false;
 		} else if (!conteudoProgramatico.equals(other.conteudoProgramatico))
 			return false;
-		if (date == null) {
-			if (other.date != null)
+		if (data == null) {
+			if (other.data != null)
 				return false;
-		} else if (!date.equals(other.date))
+		} else if (!data.equals(other.data))
 			return false;
 		if (horasAulas != other.horasAulas)
 			return false;
@@ -123,9 +138,13 @@ public class CronogramaAula implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (planoDeEnsino == null) {
+			if (other.planoDeEnsino != null)
+				return false;
+		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
+			return false;
 		if (recurso != other.recurso)
 			return false;
 		return true;
-	}
-	
+	}	
 }
