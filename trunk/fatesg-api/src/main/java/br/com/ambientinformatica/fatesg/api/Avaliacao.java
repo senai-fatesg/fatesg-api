@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -27,9 +29,9 @@ public class Avaliacao implements Serializable {
 	
 	private String observacao;
 
-	public Long getId() {
-		return id;
-	}
+	@ManyToOne
+	@JoinColumn(name = "IDF_PLANOENSINO")
+	private PlanoDeEnsino planoDeEnsino;
 
 	public String getTipo() {
 		return tipo;
@@ -55,6 +57,18 @@ public class Avaliacao implements Serializable {
 		this.observacao = observacao;
 	}
 
+	public PlanoDeEnsino getPlanoDeEnsino() {
+		return planoDeEnsino;
+	}
+
+	public void setPlanoDeEnsino(PlanoDeEnsino planoDeEnsino) {
+		this.planoDeEnsino = planoDeEnsino;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,6 +78,8 @@ public class Avaliacao implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((observacao == null) ? 0 : observacao.hashCode());
+		result = prime * result
+				+ ((planoDeEnsino == null) ? 0 : planoDeEnsino.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
@@ -92,6 +108,11 @@ public class Avaliacao implements Serializable {
 				return false;
 		} else if (!observacao.equals(other.observacao))
 			return false;
+		if (planoDeEnsino == null) {
+			if (other.planoDeEnsino != null)
+				return false;
+		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
+			return false;
 		if (tipo == null) {
 			if (other.tipo != null)
 				return false;
@@ -101,5 +122,4 @@ public class Avaliacao implements Serializable {
 	}
 	
 	
-
 }
