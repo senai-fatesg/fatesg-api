@@ -41,7 +41,7 @@ public class CronogramaAula implements Serializable {
 	private EnumRecurso recurso;
 
 	@ManyToOne
-	@JoinColumn(name = "IDF_PLANOENSINO")
+	@JoinColumn(name = "planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
 
 	public int getAula() {

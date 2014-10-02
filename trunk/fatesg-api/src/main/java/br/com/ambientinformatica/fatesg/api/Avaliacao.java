@@ -29,9 +29,10 @@ public class Avaliacao implements Serializable {
 	
 	private String observacao;
 
-	@ManyToOne
+	@ManyToOne 
+	@JoinColumn(name="planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
-
+	
 	public String getTipo() {
 		return tipo;
 	}

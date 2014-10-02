@@ -35,7 +35,7 @@ public class PlanoDeEnsino implements Serializable{
 	private String bibliografia;
 	
 	@OneToOne
-	@JoinColumn(name="id_disciplina") 
+	@JoinColumn(name="disciplina_id") 
 	private Disciplina disciplina; 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeEnsino")

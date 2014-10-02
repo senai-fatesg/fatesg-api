@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,7 +24,7 @@ public class Curso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Column(unique = true)
+	@Id
 	private String id;
 	
 	private String descricao;
@@ -47,25 +47,26 @@ public class Curso implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtTermino = new Date();
 	
+	
 	@ManyToOne
-	@JoinColumn(name = "IDF_UNIDADEENSINO")
+	@JoinColumn(name = "unidadeEnsino_id")
 	private UnidadeEnsino unidadeEnsino;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
 	private List<Matriz> matriz;	
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinTable(name= "aluno_cursa", 
-	joinColumns = @JoinColumn(name = "id_curso"), 
-	inverseJoinColumns = @JoinColumn(name="id_aluno"))
-	private List<Aluno> alunos = new ArrayList<Aluno>();
+	@ManyToMany(
+	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+	mappedBy = "cursos", 
+	targetEntity =Aluno.class)
+	private List<Aluno> alunos;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinTable(name= "curso_colaborador", 
-	joinColumns = @JoinColumn(name = "id_curso"), 
-	inverseJoinColumns = @JoinColumn(name="id_colaborador"))
-	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
-
+	@ManyToMany(
+	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+	mappedBy = "cursos", 
+	targetEntity =Colaborador.class)
+	private List<Colaborador> colaboradores;
+	
 	public String getId() {
 		return id;
 	}
