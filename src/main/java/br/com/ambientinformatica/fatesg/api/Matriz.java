@@ -37,14 +37,17 @@ public class Matriz implements Serializable {
 	private int qtdPeriodos;
 	
 	@ManyToOne
+	@JoinColumn(name="id_curso")
 	private Curso curso;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(
+	targetEntity=Disciplina.class, 
+	cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name= "matriz_disciplina", 
 	joinColumns = @JoinColumn(name = "id_matriz"), 
-	inverseJoinColumns = @JoinColumn(name="id_disciplina"))
-	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-
+	inverseJoinColumns = @JoinColumn(name="id_disciplina"))	
+	private List<Disciplina> disciplinas;
+	
 	public String getDescricao() {
 		return descricao;
 	}

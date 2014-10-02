@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,7 +18,7 @@ public class Disciplina implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Column(unique = true)
+	@Id
 	private String id;
 	
 	private String nome;
@@ -28,23 +28,23 @@ public class Disciplina implements Serializable{
 	@OneToOne(mappedBy="disciplina", cascade= CascadeType.ALL)  
 	private PlanoDeEnsino planoDeEnsino;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinTable(name= "aluno_disciplina", 
-	joinColumns = @JoinColumn(name = "id_disciplina"), 
-	inverseJoinColumns = @JoinColumn(name="id_aluno"))
-	private List<Aluno> alunos = new ArrayList<Aluno>();
+	@ManyToMany(
+	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+	mappedBy = "disciplinas", 
+	targetEntity =Aluno.class)
+	private List<Aluno> alunos;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinTable(name= "colaborador_disciplina", 
-	joinColumns = @JoinColumn(name = "id_disciplina"), 
-	inverseJoinColumns = @JoinColumn(name="id_colaborador"))
-	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+	@ManyToMany(
+	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+	mappedBy = "disciplinas", 
+	targetEntity =Colaborador.class)
+	private List<Colaborador> colaboradores;	
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinTable(name= "matriz_disciplina", 
-	joinColumns = @JoinColumn(name = "id_disciplina"), 
-	inverseJoinColumns = @JoinColumn(name="id_matriz"))
-	private List<Matriz> matrizes = new ArrayList<Matriz>();
+	@ManyToMany(
+	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+	mappedBy = "disciplinas", 
+	targetEntity =Matriz.class)
+	private List<Matriz> matrizes;
 
 	public String getId() {
 		return id;
@@ -162,5 +162,4 @@ public class Disciplina implements Serializable{
 			return false;
 		return true;
 	}	
-	
 }

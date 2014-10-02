@@ -31,7 +31,7 @@ public class Instituicao implements Serializable {
 	
 	private String descricao;
 		
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucao")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instituicao")
 	private List<UnidadeEnsino> unidades;
 
 	public String getNomeFantasia() {

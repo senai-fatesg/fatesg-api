@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,18 +60,22 @@ public class Aluno implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumStatusAluno status;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(
+	targetEntity=Curso.class, 
+	cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name= "aluno_cursa", 
 	joinColumns = @JoinColumn(name = "id_aluno"), 
 	inverseJoinColumns = @JoinColumn(name="id_curso"))
-	private List<Curso> cursos = new ArrayList<Curso>();
+	private List<Curso> cursos;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(
+	targetEntity=Disciplina.class, 
+	cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name= "aluno_disciplina", 
 	joinColumns = @JoinColumn(name = "id_aluno"), 
-	inverseJoinColumns = @JoinColumn(name="id_disciplina"))
-	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-	
+	inverseJoinColumns = @JoinColumn(name="id_disciplina"))	
+	private List<Disciplina> disciplinas;
+
 	public String getNome() {
 		return nome;
 	}
@@ -177,6 +180,22 @@ public class Aluno implements Serializable {
 		this.certificado2Grau = certificado2Grau;
 	}
 
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -199,6 +218,9 @@ public class Aluno implements Serializable {
 				* result
 				+ ((certificado2Grau == null) ? 0 : certificado2Grau.hashCode());
 		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
+		result = prime * result + ((cursos == null) ? 0 : cursos.hashCode());
+		result = prime * result
+				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((endereco == null) ? 0 : endereco.hashCode());
@@ -248,6 +270,16 @@ public class Aluno implements Serializable {
 			if (other.cpfCnpj != null)
 				return false;
 		} else if (!cpfCnpj.equals(other.cpfCnpj))
+			return false;
+		if (cursos == null) {
+			if (other.cursos != null)
+				return false;
+		} else if (!cursos.equals(other.cursos))
+			return false;
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
+				return false;
+		} else if (!disciplinas.equals(other.disciplinas))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -305,5 +337,4 @@ public class Aluno implements Serializable {
 			return false;
 		return true;
 	}	
-	
 }

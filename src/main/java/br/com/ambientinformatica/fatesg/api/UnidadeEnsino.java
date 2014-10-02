@@ -32,7 +32,7 @@ public class UnidadeEnsino implements Serializable {
 	private String sigla;
 	
 	@ManyToOne
-	@JoinColumn(name = "IDF_INSTITUICAO")
+	@JoinColumn(name = "instituicao_id")
 	private Instituicao instituicao;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadeEnsino")

@@ -61,17 +61,21 @@ public class Colaborador implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumTipoColaborador tipo;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(
+	targetEntity=Curso.class, 
+	cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name= "curso_colaborador", 
 	joinColumns = @JoinColumn(name = "id_colaborador"), 
 	inverseJoinColumns = @JoinColumn(name="id_curso"))
-	private List<Curso> cursos = new ArrayList<Curso>();
+	private List<Curso> cursos;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(
+	targetEntity=Disciplina.class, 
+	cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name= "colaborador_disciplina", 
 	joinColumns = @JoinColumn(name = "id_colaborador"), 
 	inverseJoinColumns = @JoinColumn(name="id_disciplina"))
-	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	private List<Disciplina> disciplinas;
 	
 	public String getNome() {
 		return nome;
