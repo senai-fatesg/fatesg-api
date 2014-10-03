@@ -28,7 +28,7 @@ public class CronogramaAula implements Serializable {
 	@SequenceGenerator(name = "cronogramaAula_seq", sequenceName = "cronogramaAula_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 	
-	private int aula;
+	private String aula;
 	
 	private String conteudoProgramatico;
 	
@@ -44,11 +44,11 @@ public class CronogramaAula implements Serializable {
 	@JoinColumn(name = "planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
 
-	public int getAula() {
+	public String getAula() {
 		return aula;
 	}
 
-	public void setAula(int aula) {
+	public void setAula(String aula) {
 		this.aula = aula;
 	}
 
@@ -96,7 +96,7 @@ public class CronogramaAula implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + aula;
+		result = prime * result + ((aula == null) ? 0 : aula.hashCode());
 		result = prime
 				* result
 				+ ((conteudoProgramatico == null) ? 0 : conteudoProgramatico
@@ -119,7 +119,10 @@ public class CronogramaAula implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CronogramaAula other = (CronogramaAula) obj;
-		if (aula != other.aula)
+		if (aula == null) {
+			if (other.aula != null)
+				return false;
+		} else if (!aula.equals(other.aula))
 			return false;
 		if (conteudoProgramatico == null) {
 			if (other.conteudoProgramatico != null)
@@ -146,5 +149,6 @@ public class CronogramaAula implements Serializable {
 		if (recurso != other.recurso)
 			return false;
 		return true;
-	}	
+	}
+	
 }
