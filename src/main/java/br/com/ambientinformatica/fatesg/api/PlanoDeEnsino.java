@@ -34,6 +34,10 @@ public class PlanoDeEnsino implements Serializable{
 	
 	private String bibliografia;
 	
+	private String metodologiaEnsino;
+	
+	private String recursoDidatico;
+	
 	@OneToOne
 	@JoinColumn(name="disciplina_id") 
 	private Disciplina disciplina; 
@@ -68,12 +72,28 @@ public class PlanoDeEnsino implements Serializable{
 		this.habilidade = habilidade;
 	}
 
+	public String getMetodologiaEnsino() {
+		return metodologiaEnsino;
+	}
+
+	public void setMetodologiaEnsino(String metodologiaEnsino) {
+		this.metodologiaEnsino = metodologiaEnsino;
+	}
+
 	public String getBaseTecnologica() {
 		return baseTecnologica;
 	}
 
 	public void setBaseTecnologica(String baseTecnologica) {
 		this.baseTecnologica = baseTecnologica;
+	}	
+	
+	public String getRecursoDidatico() {
+		return recursoDidatico;
+	}
+
+	public void setRecursoDidatico(String recursoDidatico) {
+		this.recursoDidatico = recursoDidatico;
 	}
 
 	public String getBibliografia() {
@@ -89,14 +109,26 @@ public class PlanoDeEnsino implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
+				+ ((avaliacoes == null) ? 0 : avaliacoes.hashCode());
+		result = prime * result
 				+ ((baseTecnologica == null) ? 0 : baseTecnologica.hashCode());
 		result = prime * result
 				+ ((bibliografia == null) ? 0 : bibliografia.hashCode());
 		result = prime * result
 				+ ((competencia == null) ? 0 : competencia.hashCode());
 		result = prime * result
+				+ ((cronogramas == null) ? 0 : cronogramas.hashCode());
+		result = prime * result
+				+ ((disciplina == null) ? 0 : disciplina.hashCode());
+		result = prime * result
 				+ ((habilidade == null) ? 0 : habilidade.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime
+				* result
+				+ ((metodologiaEnsino == null) ? 0 : metodologiaEnsino
+						.hashCode());
+		result = prime * result
+				+ ((recursoDidatico == null) ? 0 : recursoDidatico.hashCode());
 		return result;
 	}
 
@@ -109,6 +141,11 @@ public class PlanoDeEnsino implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PlanoDeEnsino other = (PlanoDeEnsino) obj;
+		if (avaliacoes == null) {
+			if (other.avaliacoes != null)
+				return false;
+		} else if (!avaliacoes.equals(other.avaliacoes))
+			return false;
 		if (baseTecnologica == null) {
 			if (other.baseTecnologica != null)
 				return false;
@@ -124,6 +161,16 @@ public class PlanoDeEnsino implements Serializable{
 				return false;
 		} else if (!competencia.equals(other.competencia))
 			return false;
+		if (cronogramas == null) {
+			if (other.cronogramas != null)
+				return false;
+		} else if (!cronogramas.equals(other.cronogramas))
+			return false;
+		if (disciplina == null) {
+			if (other.disciplina != null)
+				return false;
+		} else if (!disciplina.equals(other.disciplina))
+			return false;
 		if (habilidade == null) {
 			if (other.habilidade != null)
 				return false;
@@ -134,9 +181,17 @@ public class PlanoDeEnsino implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (metodologiaEnsino == null) {
+			if (other.metodologiaEnsino != null)
+				return false;
+		} else if (!metodologiaEnsino.equals(other.metodologiaEnsino))
+			return false;
+		if (recursoDidatico == null) {
+			if (other.recursoDidatico != null)
+				return false;
+		} else if (!recursoDidatico.equals(other.recursoDidatico))
+			return false;
 		return true;
 	}
-	
-	
-
+		
 }

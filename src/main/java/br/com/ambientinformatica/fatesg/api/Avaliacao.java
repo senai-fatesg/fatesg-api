@@ -3,6 +3,8 @@ package br.com.ambientinformatica.fatesg.api;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,8 @@ public class Avaliacao implements Serializable {
 	@SequenceGenerator(name = "avaliacao_seq", sequenceName = "avaliacao_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 	
-	private String tipo;
+	@Enumerated(EnumType.STRING)
+	private EnumTipoAvaliacao tipo;
 	
 	private String criterio;
 	
@@ -33,16 +36,12 @@ public class Avaliacao implements Serializable {
 	@JoinColumn(name="planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
 	
-	public String getTipo() {
+	public EnumTipoAvaliacao getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 	public String getCriterio() {
-		return criterio;
+		return criterio;	
 	}
 
 	public void setCriterio(String criterio) {
@@ -113,13 +112,9 @@ public class Avaliacao implements Serializable {
 				return false;
 		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
 			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
+		if (tipo != other.tipo)
 			return false;
 		return true;
 	}
-	
 	
 }
