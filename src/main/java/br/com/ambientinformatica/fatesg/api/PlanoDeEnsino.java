@@ -38,6 +38,10 @@ public class PlanoDeEnsino implements Serializable{
 	
 	private String recursoDidatico;
 	
+	private String coordenadorPedagogico;
+	
+	private String coordenadorTecnico;
+	
 	@OneToOne
 	@JoinColumn(name="disciplina_id") 
 	private Disciplina disciplina; 
@@ -102,6 +106,22 @@ public class PlanoDeEnsino implements Serializable{
 
 	public void setBibliografia(String bibliografia) {
 		this.bibliografia = bibliografia;
+	}	
+
+	public String getCoordenadorPedagogico() {
+		return coordenadorPedagogico;
+	}
+
+	public void setCoordenadorPedagogico(String coordenadorPedagogico) {
+		coordenadorPedagogico = coordenadorPedagogico;
+	}
+
+	public String getCoordenadorTecnico() {
+		return coordenadorTecnico;
+	}
+
+	public void setCoordenadorTecnico(String coordenadorTecnico) {
+		coordenadorTecnico = coordenadorTecnico;
 	}
 
 	@Override
@@ -116,6 +136,14 @@ public class PlanoDeEnsino implements Serializable{
 				+ ((bibliografia == null) ? 0 : bibliografia.hashCode());
 		result = prime * result
 				+ ((competencia == null) ? 0 : competencia.hashCode());
+		result = prime
+				* result
+				+ ((coordenadorPedagogico == null) ? 0 : coordenadorPedagogico
+						.hashCode());
+		result = prime
+				* result
+				+ ((coordenadorTecnico == null) ? 0 : coordenadorTecnico
+						.hashCode());
 		result = prime * result
 				+ ((cronogramas == null) ? 0 : cronogramas.hashCode());
 		result = prime * result
@@ -161,6 +189,16 @@ public class PlanoDeEnsino implements Serializable{
 				return false;
 		} else if (!competencia.equals(other.competencia))
 			return false;
+		if (coordenadorPedagogico == null) {
+			if (other.coordenadorPedagogico != null)
+				return false;
+		} else if (!coordenadorPedagogico.equals(other.coordenadorPedagogico))
+			return false;
+		if (coordenadorTecnico == null) {
+			if (other.coordenadorTecnico != null)
+				return false;
+		} else if (!coordenadorTecnico.equals(other.coordenadorTecnico))
+			return false;
 		if (cronogramas == null) {
 			if (other.cronogramas != null)
 				return false;
@@ -193,5 +231,5 @@ public class PlanoDeEnsino implements Serializable{
 			return false;
 		return true;
 	}
-		
+
 }
