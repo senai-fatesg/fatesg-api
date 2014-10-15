@@ -113,7 +113,7 @@ public class PlanoDeEnsino implements Serializable{
 	}
 
 	public void setCoordenadorPedagogico(String coordenadorPedagogico) {
-		coordenadorPedagogico = coordenadorPedagogico;
+		this.coordenadorPedagogico = coordenadorPedagogico;
 	}
 
 	public String getCoordenadorTecnico() {
@@ -121,7 +121,15 @@ public class PlanoDeEnsino implements Serializable{
 	}
 
 	public void setCoordenadorTecnico(String coordenadorTecnico) {
-		coordenadorTecnico = coordenadorTecnico;
+		this.coordenadorTecnico = coordenadorTecnico;
+	}
+	
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 	@Override
