@@ -25,8 +25,7 @@ public class Avaliacao implements Serializable {
 	@SequenceGenerator(name = "avaliacao_seq", sequenceName = "avaliacao_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 	
-	@Enumerated(EnumType.STRING)
-	private EnumTipoAvaliacao tipo;
+	private String tipo;
 	
 	private String criterio;
 	
@@ -36,8 +35,12 @@ public class Avaliacao implements Serializable {
 	@JoinColumn(name="planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
 	
-	public EnumTipoAvaliacao getTipo() {
+	public String getTipo() {
 		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getCriterio() {
