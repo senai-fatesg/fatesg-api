@@ -161,5 +161,6 @@ public class Disciplina implements Serializable{
 		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
 			return false;
 		return true;
-	}	
+	}
+
 }

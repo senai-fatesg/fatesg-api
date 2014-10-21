@@ -38,9 +38,13 @@ public class PlanoDeEnsino implements Serializable{
 	
 	private String recursoDidatico;
 	
-	private String coordenadorPedagogico;
+	@OneToOne
+	@JoinColumn(name="coordenadorPedagogico_id") 
+	private Colaborador coordenadorPedagogico;
 	
-	private String coordenadorTecnico;
+	@OneToOne
+	@JoinColumn(name="coordenadorTecnico_id") 
+	private Colaborador coordenadorTecnico;
 	
 	@OneToOne
 	@JoinColumn(name="disciplina_id") 
@@ -106,24 +110,24 @@ public class PlanoDeEnsino implements Serializable{
 
 	public void setBibliografia(String bibliografia) {
 		this.bibliografia = bibliografia;
-	}	
-
-	public String getCoordenadorPedagogico() {
+	}
+		
+	public Colaborador getCoordenadorPedagogico() {
 		return coordenadorPedagogico;
 	}
 
-	public void setCoordenadorPedagogico(String coordenadorPedagogico) {
+	public void setCoordenadorPedagogico(Colaborador coordenadorPedagogico) {
 		this.coordenadorPedagogico = coordenadorPedagogico;
 	}
 
-	public String getCoordenadorTecnico() {
+	public Colaborador getCoordenadorTecnico() {
 		return coordenadorTecnico;
 	}
 
-	public void setCoordenadorTecnico(String coordenadorTecnico) {
+	public void setCoordenadorTecnico(Colaborador coordenadorTecnico) {
 		this.coordenadorTecnico = coordenadorTecnico;
 	}
-	
+
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
