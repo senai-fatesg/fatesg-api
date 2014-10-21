@@ -200,6 +200,9 @@ public class Colaborador implements Serializable {
 		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
+		result = prime * result + ((cursos == null) ? 0 : cursos.hashCode());
+		result = prime * result
+				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((endereco == null) ? 0 : endereco.hashCode());
@@ -246,6 +249,16 @@ public class Colaborador implements Serializable {
 			if (other.cpfCnpj != null)
 				return false;
 		} else if (!cpfCnpj.equals(other.cpfCnpj))
+			return false;
+		if (cursos == null) {
+			if (other.cursos != null)
+				return false;
+		} else if (!cursos.equals(other.cursos))
+			return false;
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
+				return false;
+		} else if (!disciplinas.equals(other.disciplinas))
 			return false;
 		if (email == null) {
 			if (other.email != null)
