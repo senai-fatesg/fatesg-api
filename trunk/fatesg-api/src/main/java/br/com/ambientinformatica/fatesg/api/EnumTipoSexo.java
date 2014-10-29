@@ -1,21 +1,21 @@
 package br.com.ambientinformatica.fatesg.api;
 
-public enum EnumTipoSexo {
-	Masculino,   
-	Feminino;  
+import br.com.ambientinformatica.util.IEnum;
+
+public enum EnumTipoSexo implements IEnum{
 	
-	 @Override
-	    public String toString() {
-	        switch (this) {
-	            case Masculino: {
-	                return "Masculino";
-	            }
-	            case Feminino: {
-	                return "Feminino";
-	            }
+	MASCULINO("M"), FEMININO("F");
 
-	        }
-	        return null;
-	    }
+	private final String descricao;
 
+	EnumTipoSexo(String descricao) {
+		this.descricao= descricao;
+			
+	}
+
+	@Override
+	public String getDescricao() {
+		return descricao;
+	}
 }
+
