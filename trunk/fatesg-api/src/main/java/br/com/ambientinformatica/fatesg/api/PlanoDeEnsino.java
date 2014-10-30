@@ -8,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -38,17 +37,9 @@ public class PlanoDeEnsino implements Serializable{
 	
 	private String recursoDidatico;
 	
-	@OneToOne
-	@JoinColumn(name="coordenadorPedagogico_id") 
-	private Colaborador coordenadorPedagogico;
+	@OneToOne(mappedBy="planoDeEnsino")
+	private Disciplina disciplina;
 	
-	@OneToOne
-	@JoinColumn(name="coordenadorTecnico_id") 
-	private Colaborador coordenadorTecnico;
-	
-	@OneToOne
-	@JoinColumn(name="disciplina_id") 
-	private Disciplina disciplina; 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeEnsino")
 	private List<Avaliacao> avaliacoes;
@@ -111,23 +102,7 @@ public class PlanoDeEnsino implements Serializable{
 	public void setBibliografia(String bibliografia) {
 		this.bibliografia = bibliografia;
 	}
-		
-	public Colaborador getCoordenadorPedagogico() {
-		return coordenadorPedagogico;
-	}
-
-	public void setCoordenadorPedagogico(Colaborador coordenadorPedagogico) {
-		this.coordenadorPedagogico = coordenadorPedagogico;
-	}
-
-	public Colaborador getCoordenadorTecnico() {
-		return coordenadorTecnico;
-	}
-
-	public void setCoordenadorTecnico(Colaborador coordenadorTecnico) {
-		this.coordenadorTecnico = coordenadorTecnico;
-	}
-
+	
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
@@ -148,14 +123,6 @@ public class PlanoDeEnsino implements Serializable{
 				+ ((bibliografia == null) ? 0 : bibliografia.hashCode());
 		result = prime * result
 				+ ((competencia == null) ? 0 : competencia.hashCode());
-		result = prime
-				* result
-				+ ((coordenadorPedagogico == null) ? 0 : coordenadorPedagogico
-						.hashCode());
-		result = prime
-				* result
-				+ ((coordenadorTecnico == null) ? 0 : coordenadorTecnico
-						.hashCode());
 		result = prime * result
 				+ ((cronogramas == null) ? 0 : cronogramas.hashCode());
 		result = prime * result
@@ -201,16 +168,6 @@ public class PlanoDeEnsino implements Serializable{
 				return false;
 		} else if (!competencia.equals(other.competencia))
 			return false;
-		if (coordenadorPedagogico == null) {
-			if (other.coordenadorPedagogico != null)
-				return false;
-		} else if (!coordenadorPedagogico.equals(other.coordenadorPedagogico))
-			return false;
-		if (coordenadorTecnico == null) {
-			if (other.coordenadorTecnico != null)
-				return false;
-		} else if (!coordenadorTecnico.equals(other.coordenadorTecnico))
-			return false;
 		if (cronogramas == null) {
 			if (other.cronogramas != null)
 				return false;
@@ -243,5 +200,4 @@ public class PlanoDeEnsino implements Serializable{
 			return false;
 		return true;
 	}
-
 }

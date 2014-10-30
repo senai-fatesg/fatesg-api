@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Disciplina implements Serializable{
@@ -21,7 +22,8 @@ public class Disciplina implements Serializable{
 	
 	private int cargaHoraria;
 	
-	@OneToOne(mappedBy="disciplina", cascade= CascadeType.ALL)  
+	@OneToOne
+	@PrimaryKeyJoinColumn(name="disciplina_id")
 	private PlanoDeEnsino planoDeEnsino;
 
 	@ManyToMany(
