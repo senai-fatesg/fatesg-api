@@ -4,12 +4,13 @@ import br.com.ambientinformatica.util.IEnum;
 
 public enum EnumTipoSexo implements IEnum{
 	
-	MASCULINO("M"), FEMININO("F");
+	MASCULINO("Masculino"), 
+	FEMININO("Feminino");
 
 	private final String descricao;
 
 	EnumTipoSexo(String descricao) {
-		this.descricao= descricao;
+		this.descricao = descricao;
 			
 	}
 
