@@ -1,7 +1,7 @@
 package br.com.ambientinformatica.fatesg.api;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -206,6 +206,9 @@ public class Aluno implements Serializable {
 
 	public EnumStatusAluno getStatus() {
 		return status;
+	}
+	public List<EnumTipoSexo> getTiposSexo(){
+		 return Arrays.asList(EnumTipoSexo.values());
 	}
 
 	@Override
