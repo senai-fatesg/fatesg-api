@@ -29,7 +29,7 @@ public class Colaborador implements Serializable {
 	private String nome;
 
 	@Column(unique = true)
-	private Long cpfCnpj;
+	private String cpfCnpj;
 
 	private String rg;
 
@@ -83,11 +83,11 @@ public class Colaborador implements Serializable {
 		this.nome = nome;
 	}
 
-	public Long getCpfCnpj() {
+	public String getCpfCnpj() {
 		return cpfCnpj;
 	}
 
-	public void setCpfCnpj(Long cpfCnpj) {
+	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
 
