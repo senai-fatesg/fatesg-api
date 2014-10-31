@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Disciplina implements Serializable{
@@ -19,6 +21,12 @@ public class Disciplina implements Serializable{
 	private String nome;
 	
 	private int cargaHoraria;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
+	private List<CronogramaAula> cronogramas;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
+	private List<Avaliacao> avaliacoes;
 	
 	@ManyToMany(
 	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
