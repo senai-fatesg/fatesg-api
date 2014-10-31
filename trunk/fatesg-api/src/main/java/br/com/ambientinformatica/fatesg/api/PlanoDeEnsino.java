@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -37,7 +38,7 @@ public class PlanoDeEnsino implements Serializable{
 	
 	private String recursoDidatico;
 	
-	@OneToOne(mappedBy="planoDeEnsino")
+	@OneToOne
 	private Disciplina disciplina;
 	
 	
