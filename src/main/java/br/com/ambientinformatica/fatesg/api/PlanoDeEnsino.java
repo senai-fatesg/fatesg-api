@@ -41,7 +41,6 @@ public class PlanoDeEnsino implements Serializable{
 	@OneToOne
 	private Disciplina disciplina;
 	
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeEnsino")
 	private List<Avaliacao> avaliacoes;
 	

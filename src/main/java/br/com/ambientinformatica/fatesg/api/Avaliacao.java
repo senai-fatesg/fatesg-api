@@ -29,6 +29,10 @@ public class Avaliacao implements Serializable {
 	
 	private String observacao;
 
+	@ManyToOne
+	@JoinColumn(name = "disciplina_id")
+	private Disciplina disciplina;
+	
 	@ManyToOne 
 	@JoinColumn(name="planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
@@ -67,6 +71,14 @@ public class Avaliacao implements Serializable {
 
 	public Long getId() {
 		return id;
+	}	
+	
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 	@Override
@@ -75,6 +87,8 @@ public class Avaliacao implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((criterio == null) ? 0 : criterio.hashCode());
+		result = prime * result
+				+ ((disciplina == null) ? 0 : disciplina.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((observacao == null) ? 0 : observacao.hashCode());
@@ -98,6 +112,11 @@ public class Avaliacao implements Serializable {
 				return false;
 		} else if (!criterio.equals(other.criterio))
 			return false;
+		if (disciplina == null) {
+			if (other.disciplina != null)
+				return false;
+		} else if (!disciplina.equals(other.disciplina))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -113,9 +132,11 @@ public class Avaliacao implements Serializable {
 				return false;
 		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
 			return false;
-		if (tipo != other.tipo)
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
 	}
-	
 }
