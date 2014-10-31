@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Disciplina implements Serializable{
@@ -22,10 +20,6 @@ public class Disciplina implements Serializable{
 	
 	private int cargaHoraria;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn(name="disciplina_id")
-	private PlanoDeEnsino planoDeEnsino;
-
 	@ManyToMany(
 	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
 	mappedBy = "disciplinas", 
@@ -68,14 +62,6 @@ public class Disciplina implements Serializable{
 		this.cargaHoraria = cargaHoraria;
 	}
 
-	public PlanoDeEnsino getPlanoDeEnsino() {
-		return planoDeEnsino;
-	}
-
-	public void setPlanoDeEnsino(PlanoDeEnsino planoDeEnsino) {
-		this.planoDeEnsino = planoDeEnsino;
-	}
-
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
@@ -112,8 +98,6 @@ public class Disciplina implements Serializable{
 		result = prime * result
 				+ ((matrizes == null) ? 0 : matrizes.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result
-				+ ((planoDeEnsino == null) ? 0 : planoDeEnsino.hashCode());
 		return result;
 	}
 
@@ -153,12 +137,6 @@ public class Disciplina implements Serializable{
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (planoDeEnsino == null) {
-			if (other.planoDeEnsino != null)
-				return false;
-		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
-			return false;
 		return true;
 	}
-
 }
