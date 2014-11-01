@@ -54,6 +54,13 @@ public class CronogramaAula implements Serializable {
 
 	public void setAula(String aula) {
 		this.aula = aula;
+	}	
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 	public String getConteudoProgramatico() {
