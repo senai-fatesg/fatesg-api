@@ -3,6 +3,8 @@ package br.com.ambientinformatica.fatesg.api;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,8 @@ public class Avaliacao implements Serializable {
 	@SequenceGenerator(name = "avaliacao_seq", sequenceName = "avaliacao_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 	
-	private String tipo;
+	@Enumerated(EnumType.STRING)
+	private EnumTipoAvaliacao tipoAvaliacao;
 	
 	private String criterio;
 	
@@ -37,12 +40,8 @@ public class Avaliacao implements Serializable {
 	@JoinColumn(name="planoDeEnsino_id")
 	private PlanoDeEnsino planoDeEnsino;
 	
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public EnumTipoAvaliacao getTipoAvaliacao() {
+		return tipoAvaliacao;
 	}
 
 	public String getCriterio() {
@@ -94,7 +93,7 @@ public class Avaliacao implements Serializable {
 				+ ((observacao == null) ? 0 : observacao.hashCode());
 		result = prime * result
 				+ ((planoDeEnsino == null) ? 0 : planoDeEnsino.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((tipoAvaliacao == null) ? 0 : tipoAvaliacao.hashCode());
 		return result;
 	}
 
@@ -132,10 +131,7 @@ public class Avaliacao implements Serializable {
 				return false;
 		} else if (!planoDeEnsino.equals(other.planoDeEnsino))
 			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
+		if (tipoAvaliacao != other.tipoAvaliacao)
 			return false;
 		return true;
 	}
