@@ -1,9 +1,22 @@
 package br.com.ambientinformatica.fatesg.api;
 
-public enum EnumTurnoCurso {
+import br.com.ambientinformatica.util.IEnum;
 
-	Matutino,
-	Vespertino,
-	Noturno,
-	Integral
+public enum EnumTurnoCurso implements IEnum {
+
+	Matutino("Matutino"), Vespertino("Vespertino"), Noturno("Noturno"), Integral(
+			"Integral");
+
+	private final String descricao;
+
+	EnumTurnoCurso(String descricao) {
+		this.descricao = descricao;
+
+	}
+
+	@Override
+	public String getDescricao() {
+		return descricao;
+	}
+
 }

@@ -1,7 +1,6 @@
 package br.com.ambientinformatica.fatesg.api;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -20,61 +18,54 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Curso implements Serializable{
+public class Curso implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
-	
+
 	private String descricao;
-	
+
 	@Enumerated(EnumType.STRING)
 	private EnumTurnoCurso turno;
-	
+
 	@Enumerated(EnumType.STRING)
 	private EnumModalidadeCurso modalidade;
-	
+
 	private int cargaHoraria;
-	
+
 	private String nome;
-	
+
 	private String sigla;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtInicio = new Date();
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtTermino = new Date();
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "unidadeEnsino_id")
 	private UnidadeEnsino unidadeEnsino;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
-	private List<Matriz> matriz;	
-	
-	@ManyToMany(
-	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
-	mappedBy = "cursos", 
-	targetEntity =Aluno.class)
+	private List<Matriz> matriz;
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "cursos", targetEntity = Aluno.class)
 	private List<Aluno> alunos;
-	
-	@ManyToMany(
-	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
-	mappedBy = "cursos", 
-	targetEntity =Colaborador.class)
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "cursos", targetEntity = Colaborador.class)
 	private List<Colaborador> colaboradores;
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public int getCargaHoraria() {
 		return cargaHoraria;
 	}
@@ -145,7 +136,7 @@ public class Curso implements Serializable{
 
 	public void setColaboradores(List<Colaborador> colaboradores) {
 		this.colaboradores = colaboradores;
-	}	
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -255,6 +246,17 @@ public class Curso implements Serializable{
 		} else if (!unidadeEnsino.equals(other.unidadeEnsino))
 			return false;
 		return true;
-	}		
+	}
+
+	@Override
+	public String toString() {
+		return "Curso [id=" + id + ", descricao=" + descricao + ", turno="
+				+ turno + ", modalidade=" + modalidade + ", cargaHoraria="
+				+ cargaHoraria + ", nome=" + nome + ", sigla=" + sigla
+				+ ", dtInicio=" + dtInicio + ", dtTermino=" + dtTermino
+				+ ", unidadeEnsino=" + unidadeEnsino + ", matriz=" + matriz
+				+ ", alunos=" + alunos + ", colaboradores=" + colaboradores
+				+ "]";
+	}
+
 }
-	
