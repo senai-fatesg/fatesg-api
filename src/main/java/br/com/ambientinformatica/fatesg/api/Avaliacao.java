@@ -43,6 +43,10 @@ public class Avaliacao implements Serializable {
 	public EnumTipoAvaliacao getTipoAvaliacao() {
 		return tipoAvaliacao;
 	}
+	
+	public void setTipoAvaliacao(EnumTipoAvaliacao tipoAvaliacao) {
+		this.tipoAvaliacao = tipoAvaliacao;
+	}
 
 	public String getCriterio() {
 		return criterio;	
