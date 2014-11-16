@@ -12,8 +12,10 @@ public enum EnumTipoAvaliacao implements IEnum{
 	EnumTipoAvaliacao(String descricao) {
 		this.descricao = descricao;			
 	}
+	
 	@Override
 	public String getDescricao() {
 		return descricao;
 	}
+	
 }
