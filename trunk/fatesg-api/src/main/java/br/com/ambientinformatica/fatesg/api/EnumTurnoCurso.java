@@ -4,8 +4,10 @@ import br.com.ambientinformatica.util.IEnum;
 
 public enum EnumTurnoCurso implements IEnum {
 
-	Matutino("Matutino"), Vespertino("Vespertino"), Noturno("Noturno"), Integral(
-			"Integral");
+	MATUTINO("Matutino"), 
+	VESPERTINO("Vespertino"), 
+	NOTURNO("Noturno"), 
+	INTEGRAL("Integral");
 
 	private final String descricao;
 
