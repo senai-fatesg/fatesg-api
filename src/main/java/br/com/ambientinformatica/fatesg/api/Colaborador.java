@@ -191,6 +191,14 @@ public class Colaborador implements Serializable {
 		return tipo;
 	}
 
+	public void setTipoSexo(EnumTipoSexo tipoSexo) {
+		this.tipoSexo = tipoSexo;
+	}
+
+	public void setTipo(EnumTipoColaborador tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
