@@ -204,11 +204,16 @@ public class Aluno implements Serializable {
 		return tipoSexo;
 	}
 
+	public void setTipoSexo(EnumTipoSexo tipoSexo) {
+		this.tipoSexo = tipoSexo;
+	}
+
 	public EnumStatusAluno getStatus() {
 		return status;
 	}
-	public List<EnumTipoSexo> getTiposSexo(){
-		 return Arrays.asList(EnumTipoSexo.values());
+
+	public void setStatus(EnumStatusAluno status) {
+		this.status = status;
 	}
 
 	@Override

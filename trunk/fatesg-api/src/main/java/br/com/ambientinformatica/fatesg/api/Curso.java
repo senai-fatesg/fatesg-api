@@ -154,6 +154,14 @@ public class Curso implements Serializable {
 		return modalidade;
 	}
 
+	public void setTurno(EnumTurnoCurso turno) {
+		this.turno = turno;
+	}
+
+	public void setModalidade(EnumModalidadeCurso modalidade) {
+		this.modalidade = modalidade;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
