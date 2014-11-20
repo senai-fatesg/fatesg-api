@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>utilAmbient</artifactId>
-			<version>1.0.10-SNAPSHOT</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
