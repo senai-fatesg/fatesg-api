@@ -1,17 +1,187 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.ambientinformatica.fatesg</groupId>
-	<artifactId>fatesg-api</artifactId>
-	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>fatesg-api</name>
-	<url>http://solutioin.com</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>br.com.ambientinformatica.fatesg</groupId>
+		<artifactId>fatesg-api</artifactId>
+		<packaging>jar</packaging>
+		<version>0.0.1-SNAPSHOT</version>
+		<name>fatesg-api</name>
+		<url>http://solutioin.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
 	</properties>
-	
-		<reporting>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>br.com.ambientinformatica</groupId>
+			<artifactId>ambient-jpa</artifactId>
+			<version>2.0.9</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-validator</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.0.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.ambientinformatica</groupId>
+			<artifactId>utilAmbient</artifactId>
+			<version>1.0.10-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.ambientinformatica</groupId>
+			<artifactId>ambient-swing</artifactId>
+			<version>0.0.11</version>
+			<exclusions>
+				<exclusion>
+					<groupId>jasperreports</groupId>
+					<artifactId>jasperreports</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>br.com.ambientinformatica</groupId>
+					<artifactId>utilAmbient</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>br.com.ambientinformatica</groupId>
+			<artifactId>ambient-corporativo</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.ambientinformatica.notafiscal</groupId>
+			<artifactId>notafiscal-integracao</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.2.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.solutioin</groupId>
+			<artifactId>solutio-test</artifactId>
+			<version>0.0.3</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>fr.avianey.mojo</groupId>
+					<artifactId>hsqldb-maven-plugin</artifactId>
+					<!-- shared config for start and stop -->
+					<configuration>
+						<driver>org.hsqldb.jdbcDriver</driver>
+						<path>mem:test</path>
+						<address>localhost</address>
+						<name>xdb</name>
+						<username>sa</username>
+						<password />
+						<validationQuery>SELECT 1 FROM INFORMATION_SCHEMA.SYSTEM_USERS</validationQuery>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<argLine>${jacoco.agent.argLine}</argLine>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- start HSQLDB before -->
+			<plugin>
+				<groupId>fr.avianey.mojo</groupId>
+				<artifactId>hsqldb-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>start-hsqldb</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- stop HSQLDB after -->
+			<plugin>
+				<groupId>fr.avianey.mojo</groupId>
+				<artifactId>hsqldb-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>stop-hsqldb</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.1.201405082137</version>
+				<configuration>
+					<propertyName>jacoco.agent.argLine</propertyName>
+					<destFile>${sonar.jacoco.itReportPath}</destFile>
+					<append>true</append>
+				</configuration>
+				<executions>
+					<execution>
+						<id>agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+<reporting>
 		<plugins>
 			<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -31,57 +201,7 @@
 			</configuration>
       </plugin>
 	</plugins>
-	</reporting> 
-	
-	<dependencies>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.3.1</version>
-		</dependency>
-		<dependency> 
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version> 
-		</dependency>
-		<dependency>
-			<groupId>br.com.ambientinformatica</groupId>
-			<artifactId>ambient-corporativo</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency> 
-			<groupId>br.com.ambientinformatica</groupId>
-			<artifactId>utilAmbient</artifactId>
-			<version>1.0.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency> 
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-		
+	</reporting>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -97,9 +217,8 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:svn:svn://solutioin.com/home/svn/util/tags/ambient-jpa-0.0.7
-		</connection>
-		<developerConnection>scm:svn:svn://solutioin.com/home/svn/util/tags/ambient-jpa-0.0.7
-		</developerConnection>
+		<connection>scm:svn:http://187.55.176.60/svn/fatesg/trunk/fatesg-api/</connection>
+		<developerConnection>scm:svn:http://187.55.176.60/svn/fatesg/trunk/fatesg-api/</developerConnection>
 	</scm>
+
 </project>
