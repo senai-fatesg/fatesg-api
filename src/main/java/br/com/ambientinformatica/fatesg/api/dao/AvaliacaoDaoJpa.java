@@ -2,7 +2,7 @@ package br.com.ambientinformatica.fatesg.api.dao;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.fatesg.api.Avaliacao;
+import br.com.ambientinformatica.fatesg.api.entidade.Avaliacao;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("avaliacaoDao")

@@ -9,7 +9,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
+import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("unidadeEnsinoDao")

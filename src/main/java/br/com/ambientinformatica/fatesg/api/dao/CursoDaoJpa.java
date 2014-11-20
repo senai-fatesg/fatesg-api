@@ -2,7 +2,7 @@ package br.com.ambientinformatica.fatesg.api.dao;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.fatesg.api.Curso;
+import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("cursoDao")

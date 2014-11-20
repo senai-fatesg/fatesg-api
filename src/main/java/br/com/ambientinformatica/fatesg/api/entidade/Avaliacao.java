@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.api;
+package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
 

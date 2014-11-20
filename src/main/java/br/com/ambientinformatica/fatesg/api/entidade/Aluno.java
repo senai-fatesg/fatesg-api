@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.api;
+package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,24 +17,24 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Colaborador implements Serializable {
+public class Aluno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "colaborador_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "colaborador_seq", sequenceName = "colaborador_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(generator = "aluno_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "aluno_seq", sequenceName = "aluno_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 
 	private String nome;
-
+	
 	@Column(unique = true)
 	private String cpfCnpj;
 
 	private String rg;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoSexo tipoSexo;
+	private EnumTipoSexo tipoSexo = EnumTipoSexo.MASCULINO;
 
 	private String tituloEleitor;
 
@@ -54,27 +54,27 @@ public class Colaborador implements Serializable {
 
 	private String cep;
 
-	private String historico;
+	private String certificado2Grau;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoColaborador tipo = EnumTipoColaborador.PROFESSOR;
+	private EnumStatusAluno status;
 
 	@ManyToMany(
 	targetEntity=Curso.class, 
 	cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name= "curso_colaborador", 
-	joinColumns = @JoinColumn(name = "id_colaborador"), 
+	@JoinTable(name= "aluno_cursa", 
+	joinColumns = @JoinColumn(name = "id_aluno"), 
 	inverseJoinColumns = @JoinColumn(name="id_curso"))
 	private List<Curso> cursos;
 	
 	@ManyToMany(
 	targetEntity=Disciplina.class, 
 	cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name= "colaborador_disciplina", 
-	joinColumns = @JoinColumn(name = "id_colaborador"), 
-	inverseJoinColumns = @JoinColumn(name="id_disciplina"))
+	@JoinTable(name= "aluno_disciplina", 
+	joinColumns = @JoinColumn(name = "id_aluno"), 
+	inverseJoinColumns = @JoinColumn(name="id_disciplina"))	
 	private List<Disciplina> disciplinas;
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -171,12 +171,28 @@ public class Colaborador implements Serializable {
 		this.cep = cep;
 	}
 
-	public String getHistorico() {
-		return historico;
+	public String getCertificado2Grau() {
+		return certificado2Grau;
 	}
 
-	public void setHistorico(String historico) {
-		this.historico = historico;
+	public void setCertificado2Grau(String certificado2Grau) {
+		this.certificado2Grau = certificado2Grau;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	public Long getId() {
@@ -187,16 +203,16 @@ public class Colaborador implements Serializable {
 		return tipoSexo;
 	}
 
-	public EnumTipoColaborador getTipo() {
-		return tipo;
-	}
-
 	public void setTipoSexo(EnumTipoSexo tipoSexo) {
 		this.tipoSexo = tipoSexo;
 	}
 
-	public void setTipo(EnumTipoColaborador tipo) {
-		this.tipo = tipo;
+	public EnumStatusAluno getStatus() {
+		return status;
+	}
+
+	public void setStatus(EnumStatusAluno status) {
+		this.status = status;
 	}
 
 	@Override
@@ -205,6 +221,9 @@ public class Colaborador implements Serializable {
 		int result = 1;
 		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime
+				* result
+				+ ((certificado2Grau == null) ? 0 : certificado2Grau.hashCode());
 		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
 		result = prime * result + ((cursos == null) ? 0 : cursos.hashCode());
 		result = prime * result
@@ -212,8 +231,6 @@ public class Colaborador implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result
-				+ ((historico == null) ? 0 : historico.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((municipio == null) ? 0 : municipio.hashCode());
@@ -221,9 +238,9 @@ public class Colaborador implements Serializable {
 		result = prime * result
 				+ ((reservista == null) ? 0 : reservista.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result
 				+ ((tipoSexo == null) ? 0 : tipoSexo.hashCode());
 		result = prime * result
@@ -240,7 +257,7 @@ public class Colaborador implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Colaborador other = (Colaborador) obj;
+		Aluno other = (Aluno) obj;
 		if (celular == null) {
 			if (other.celular != null)
 				return false;
@@ -250,6 +267,11 @@ public class Colaborador implements Serializable {
 			if (other.cep != null)
 				return false;
 		} else if (!cep.equals(other.cep))
+			return false;
+		if (certificado2Grau == null) {
+			if (other.certificado2Grau != null)
+				return false;
+		} else if (!certificado2Grau.equals(other.certificado2Grau))
 			return false;
 		if (cpfCnpj == null) {
 			if (other.cpfCnpj != null)
@@ -276,11 +298,6 @@ public class Colaborador implements Serializable {
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (historico == null) {
-			if (other.historico != null)
-				return false;
-		} else if (!historico.equals(other.historico))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -306,12 +323,12 @@ public class Colaborador implements Serializable {
 				return false;
 		} else if (!rg.equals(other.rg))
 			return false;
+		if (status != other.status)
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
 		} else if (!telefone.equals(other.telefone))
-			return false;
-		if (tipo != other.tipo)
 			return false;
 		if (tipoSexo != other.tipoSexo)
 			return false;
@@ -326,5 +343,5 @@ public class Colaborador implements Serializable {
 		} else if (!uf.equals(other.uf))
 			return false;
 		return true;
-	}
+	}	
 }
