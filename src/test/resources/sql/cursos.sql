@@ -1,8 +1,8 @@
-insert into parceiro (id, ativo, cliente, funcionario, fornecedor, transportadora, nome, nomecurto, cpf, cnpj, contribuinte, salario) 
-values (1, true, true, true, true, true, 'Maria do Carmos', 'Maria', '111.111.111-11', null, true, 0);
+insert into curso (id, ativo, descricao, modalidade, cargaHoraria, nome, sigla, dtInicio, dtTermino) 
+values (1, true, "Curso de Analise e Desenv. Sistemas", "GRADUACAO", 2000, "Analise e Desenvolvimento de Sistemas", "ADS", "2014-01-01", "2016-01-01");
 
-insert into parceiro (id, ativo, cliente, funcionario, fornecedor, transportadora, nome, nomecurto, cpf, cnpj, contribuinte, salario) 
-values (2, true, true, true, true, true, 'Secos e Molhados Ltda', 'Mais Valor', null, '01.123.123/0001-98', true, 0);
+insert into curso (id, ativo, descricao, modalidade, cargaHoraria, nome, sigla, dtInicio, dtTermino) 
+values (1, true, "Redes", "GRADUACAO", 2000, "Redes de Computadores", "RC", "2014-01-01", "2016-01-01");
 
-insert into parceiro (id, ativo, cliente, funcionario, fornecedor, transportadora, nome, nomecurto, cpf, cnpj, contribuinte, salario) 
-values (3, true, true, true, true, true, 'Jose', 'zé', '111.111.222-11', null, true, 0);
+insert into curso (id, ativo, descricao, modalidade, cargaHoraria, nome, sigla, dtInicio, dtTermino) 
+values (1, true, "Técnico em Manutenção de Computadores de pequeno porte", "TECNICO", 400, "Montagem e Manutencao de micro", "MM", "2014-01-01", "2014-06-01");
