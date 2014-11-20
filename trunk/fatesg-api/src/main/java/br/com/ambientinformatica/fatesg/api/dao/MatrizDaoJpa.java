@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.fatesg.api.Matriz;
+import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("matrizDao")

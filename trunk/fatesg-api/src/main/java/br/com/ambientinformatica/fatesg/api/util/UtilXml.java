@@ -1,6 +1,6 @@
 package br.com.ambientinformatica.fatesg.api.util;
 
-import br.com.ambientinformatica.fatesg.api.Aluno;
+import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 
 import com.thoughtworks.xstream.XStream;
 

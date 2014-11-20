@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.api;
+package br.com.ambientinformatica.fatesg.api.entidade;
 
 import br.com.ambientinformatica.util.IEnum;
 

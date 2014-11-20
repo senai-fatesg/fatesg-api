@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import br.com.ambientinformatica.fatesg.api.entidade.Parceiro;
-
 import com.solutioin.test.UtilSql;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,7 +32,7 @@ public class CursoDaoJpaIT {
       if(!iniciado){
          try {
             Connection con = ds.getConnection();
-            UtilSql.executarSql(con, "sql/parceiros.sql");
+            UtilSql.executarSql(con, "sql/cursos.sql");
             con.close();
             iniciado = true;
          } catch (Exception e) {
