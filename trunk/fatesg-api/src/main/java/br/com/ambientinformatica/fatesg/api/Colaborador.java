@@ -57,7 +57,7 @@ public class Colaborador implements Serializable {
 	private String historico;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoColaborador tipo;
+	private EnumTipoColaborador tipo = EnumTipoColaborador.PROFESSOR;
 
 	@ManyToMany(
 	targetEntity=Curso.class, 

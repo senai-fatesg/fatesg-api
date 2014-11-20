@@ -1,7 +1,6 @@
 package br.com.ambientinformatica.fatesg.api;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +34,7 @@ public class Aluno implements Serializable {
 	private String rg;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoSexo tipoSexo;
+	private EnumTipoSexo tipoSexo = EnumTipoSexo.MASCULINO;
 
 	private String tituloEleitor;
 
