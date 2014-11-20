@@ -4,7 +4,7 @@
      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
-	<persistence-unit name="fatesgApi">
+	<persistence-unit name="fatesg">
 
 		<class>br.com.ambientinformatica.fatesg.api.entidade.Aluno</class>
 		<class>br.com.ambientinformatica.fatesg.api.entidade.Avaliacao</class>

@@ -51,7 +51,7 @@ public class CursoDaoJpaIT {
 			 * Criar outros testes para metodos existentes
 			 */
 			List<Curso> parceiros1 = cursoDao.listar();
-			Assert.assertEquals(3, parceiros1.size());
+			Assert.assertEquals(1, parceiros1.size());
 
 		} catch (Exception e) {
 			e.printStackTrace();
