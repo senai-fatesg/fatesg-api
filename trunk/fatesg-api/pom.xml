@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.ambientinformatica.fatesg</groupId>
-	<artifactId>fatesg-api</artifactId>
-	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>fatesg-api</name>
-	<url>http://solutioin.com</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>br.com.ambientinformatica.fatesg</groupId>
+		<artifactId>fatesg-api</artifactId>
+		<packaging>jar</packaging>
+		<version>0.0.1-SNAPSHOT</version>
+		<name>fatesg-api</name>
+		<url>http://solutioin.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,12 +38,6 @@
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>utilAmbient</artifactId>
 			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>br.com.ambientinformatica</groupId>
-			<artifactId>ambient-jpa</artifactId>
-			<version>2.0.0</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
@@ -88,13 +81,6 @@
 			<artifactId>solutio-test</artifactId>
 			<version>0.0.3</version>
 			<scope>test</scope>
-		</dependency>
-		<!-- habititando a execuçao da classe SpringJUnit4ClassRunner e o uso das 
-			anotações: @ContextConfiguration e @TransactionConfiguration -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>3.2.4.RELEASE</version>
 		</dependency>
 
 	</dependencies>
@@ -195,26 +181,26 @@
 		</plugins>
 	</build>
 
-	<reporting>
+<reporting>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-
-					<!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
-					<docletArtifact>
-						<groupId>org.umlgraph</groupId>
-						<artifactId>umlgraph</artifactId>
-						<version>5.6</version>
-					</docletArtifact>
-					<additionalparam>-views -all</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
-				</configuration>
-			</plugin>
-		</plugins>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<version>2.9</version>
+			<configuration>
+				<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+		
+				<!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
+				<docletArtifact>
+					<groupId>org.umlgraph</groupId>
+					<artifactId>umlgraph</artifactId>
+					<version>5.6</version>
+				</docletArtifact>
+				<additionalparam>-views -all</additionalparam>
+				<useStandardDocletOptions>true</useStandardDocletOptions>
+			</configuration>
+      </plugin>
+	</plugins>
 	</reporting>
 
 	<distributionManagement>
