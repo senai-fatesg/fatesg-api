@@ -3,7 +3,6 @@ package br.com.ambientinformatica.fatesg.api.entidade;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,22 +27,13 @@ public class Disciplina implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
 	private List<Avaliacao> avaliacoes;
 	
-	@ManyToMany(
-	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
-	mappedBy = "disciplinas", 
-	targetEntity =Aluno.class)
+	@ManyToMany(mappedBy="disciplinas")
 	private List<Aluno> alunos;
 	
-	@ManyToMany(
-	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
-	mappedBy = "disciplinas", 
-	targetEntity =Colaborador.class)
+	@ManyToMany(mappedBy="disciplinas")
 	private List<Colaborador> colaboradores;	
 	
-	@ManyToMany(
-	cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
-	mappedBy = "disciplinas", 
-	targetEntity =Matriz.class)
+	@ManyToMany(mappedBy="disciplinas")
 	private List<Matriz> matrizes;
 
 	public String getId() {

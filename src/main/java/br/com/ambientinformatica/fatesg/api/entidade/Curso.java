@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,10 +27,10 @@ public class Curso implements Serializable {
 	private String descricao;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTurnoCurso turno;
+	private EnumTurnoCurso turno = EnumTurnoCurso.MATUTINO;
 
 	@Enumerated(EnumType.STRING)
-	private EnumModalidadeCurso modalidade;
+	private EnumModalidadeCurso modalidade = EnumModalidadeCurso.GRADUACAO;
 
 	private int cargaHoraria;
 
@@ -52,10 +51,10 @@ public class Curso implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
 	private List<Matriz> matriz;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "cursos", targetEntity = Aluno.class)
+	@ManyToMany(mappedBy="cursos")
 	private List<Aluno> alunos;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "cursos", targetEntity = Colaborador.class)
+	@ManyToMany(mappedBy="cursos")
 	private List<Colaborador> colaboradores;
 
 	public String getId() {

@@ -3,7 +3,6 @@ package br.com.ambientinformatica.fatesg.api.entidade;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,8 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -34,7 +31,7 @@ public class Colaborador implements Serializable {
 	private String rg;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoSexo tipoSexo;
+	private EnumTipoSexo tipoSexo = EnumTipoSexo.MASCULINO;
 
 	private String tituloEleitor;
 
@@ -59,20 +56,10 @@ public class Colaborador implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumTipoColaborador tipo = EnumTipoColaborador.PROFESSOR;
 
-	@ManyToMany(
-	targetEntity=Curso.class, 
-	cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name= "curso_colaborador", 
-	joinColumns = @JoinColumn(name = "id_colaborador"), 
-	inverseJoinColumns = @JoinColumn(name="id_curso"))
+	@ManyToMany
 	private List<Curso> cursos;
 	
-	@ManyToMany(
-	targetEntity=Disciplina.class, 
-	cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name= "colaborador_disciplina", 
-	joinColumns = @JoinColumn(name = "id_colaborador"), 
-	inverseJoinColumns = @JoinColumn(name="id_disciplina"))
+	@ManyToMany
 	private List<Disciplina> disciplinas;
 	
 	public String getNome() {
