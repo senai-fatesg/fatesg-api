@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 
+import com.solutioin.test.UtilSql;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value="classpath:context.xml")
 public class CursoDaoJpaIT {
