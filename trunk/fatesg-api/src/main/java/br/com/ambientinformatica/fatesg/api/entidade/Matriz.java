@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -38,12 +36,7 @@ public class Matriz implements Serializable {
 	@JoinColumn(name="id_curso")
 	private Curso curso;
 	
-	@ManyToMany(
-	targetEntity=Disciplina.class, 
-	cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name= "matriz_disciplina", 
-	joinColumns = @JoinColumn(name = "id_matriz"), 
-	inverseJoinColumns = @JoinColumn(name="id_disciplina"))	
+	@ManyToMany
 	private List<Disciplina> disciplinas;
 	
 	public String getDescricao() {
