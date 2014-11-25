@@ -1,8 +1,16 @@
 package br.com.ambientinformatica.fatesg.api.dao;
 
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
+import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("colaboradorDao")
@@ -24,6 +32,7 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		String endereco = colaborador.getEndereco();
 		String municipio = colaborador.getMunicipio();
 		String uf = colaborador.getUf();
+		@SuppressWarnings("unused")
 		String cep = colaborador.getCep();
 		String historico = colaborador.getHistorico();
 
@@ -70,6 +79,21 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		if (uf.equals("")) {
 			throw new IllegalArgumentException("*Campo Obrigátorio: UF(Estado)");
 		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Colaborador> consultarPeloNome(String nome) {
+
+		Session session = this.em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Instituicao.class);
+
+		if (StringUtils.isNotBlank(nome)) {
+			criteria.add(Restrictions.ilike("nome",
+					nome.toUpperCase(), MatchMode.START));
+		}
+		return criteria.list();
 
 	}
 
