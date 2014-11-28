@@ -87,7 +87,7 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 	public List<Colaborador> consultarPeloNome(String nome) {
 
 		Session session = this.em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Instituicao.class);
+		Criteria criteria = session.createCriteria(Colaborador.class);
 
 		if (StringUtils.isNotBlank(nome)) {
 			criteria.add(Restrictions.ilike("nome",
