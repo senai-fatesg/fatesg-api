@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.api.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,12 +11,11 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
-import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("colaboradorDao")
 public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
-		ColaboradorDao {
+		ColaboradorDao, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
