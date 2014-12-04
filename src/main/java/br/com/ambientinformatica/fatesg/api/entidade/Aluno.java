@@ -31,10 +31,10 @@ public class Aluno implements Serializable {
 	private String rg;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoSexo tipoSexo = EnumTipoSexo.MASCULINO;
+	private EnumTipoSexo tipoSexo;
 
 	@Enumerated(EnumType.STRING)
-	private EnumStatusAluno status = EnumStatusAluno.INATIVO;
+	private EnumStatusAluno status;
 	
 	private String tituloEleitor;
 

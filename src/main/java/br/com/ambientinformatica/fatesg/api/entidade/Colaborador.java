@@ -31,7 +31,7 @@ public class Colaborador implements Serializable {
 	private String rg;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoSexo tipoSexo = EnumTipoSexo.MASCULINO;
+	private EnumTipoSexo tipoSexo;
 
 	private String tituloEleitor;
 
@@ -54,7 +54,7 @@ public class Colaborador implements Serializable {
 	private String historico;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTipoColaborador tipo = EnumTipoColaborador.PROFESSOR;
+	private EnumTipoColaborador tipo;
 
 	@ManyToMany
 	private List<Curso> cursos;
