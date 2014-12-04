@@ -1,9 +1,7 @@
 package br.com.ambientinformatica.fatesg.api.dao;
 
 import java.util.Date;
-
 import org.springframework.stereotype.Repository;
-
 import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
@@ -31,4 +29,5 @@ public class MatrizDaoJpa extends PersistenciaJpa<Matriz> implements MatrizDao {
 		}
 
 	}
+
 }
