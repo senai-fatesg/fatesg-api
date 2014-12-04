@@ -1,12 +1,14 @@
 package br.com.ambientinformatica.fatesg.api.dao;
 
+import java.io.Serializable;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("alunoDao")
-public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
+public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao, Serializable {
 
 	private static final long serialVersionUID = 1L;
 

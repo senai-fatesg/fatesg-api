@@ -13,42 +13,47 @@ import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("unidadeEnsinoDao")
-public class UnidadeEnsinoDaoJpa extends PersistenciaJpa<UnidadeEnsino> implements UnidadeEnsinoDao{
+public class UnidadeEnsinoDaoJpa extends PersistenciaJpa<UnidadeEnsino>
+		implements UnidadeEnsinoDao {
 
-   private static final long serialVersionUID = 1L;
-     
-   @Override
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	public void verificarCampos(UnidadeEnsino unidadeEnsino) {
 
 		String nome = unidadeEnsino.getNome();
 		String telefone = unidadeEnsino.getTelefone();
 		String endereco = unidadeEnsino.getEndereco();
 		String sigla = unidadeEnsino.getSigla();
-		
+
 		if (nome.equals("")) {
-			throw new IllegalArgumentException("*Campo Obrigátorio: Nome da Unidade");
+			throw new IllegalArgumentException(
+					"*Campo Obrigátorio: Nome da Unidade");
 		}
 		if (telefone.equals("")) {
 			throw new IllegalArgumentException("*Campo Obrigátorio: telefone");
 		}
 		if (endereco.equals("")) {
-			throw new IllegalArgumentException("*Campo Obrigátorio: Endereço da Unidade");
+			throw new IllegalArgumentException(
+					"*Campo Obrigátorio: Endereço da Unidade");
 		}
 		if (sigla.equals("")) {
-			throw new IllegalArgumentException("*Campo Obrigátorio: Sigla da Unidade");
+			throw new IllegalArgumentException(
+					"*Campo Obrigátorio: Sigla da Unidade");
 		}
 	}
 
-@SuppressWarnings("unchecked")
-@Override
-public List<UnidadeEnsino> consultarPeloNome(String nome) {
-	Session session = this.em.unwrap(Session.class);
-	Criteria criteria = session.createCriteria(UnidadeEnsino.class);
-	
-	if (StringUtils.isNotBlank(nome)) {
-		criteria.add(Restrictions.ilike("nome", nome.toUpperCase(), MatchMode.START));
-	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UnidadeEnsino> consultarPeloNome(String nome) {
+		Session session = this.em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(UnidadeEnsino.class);
+
+		if (StringUtils.isNotBlank(nome)) {
+			criteria.add(Restrictions.ilike("nome", nome.toUpperCase(),
+					MatchMode.START));
+		}
 		return criteria.list();
-}
+	}
 
 }

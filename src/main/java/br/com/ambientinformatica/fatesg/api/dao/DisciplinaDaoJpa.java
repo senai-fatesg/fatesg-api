@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.api.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -14,7 +15,7 @@ import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("disciplinaDao")
 public class DisciplinaDaoJpa extends PersistenciaJpa<Disciplina> implements
-		DisciplinaDao {
+		DisciplinaDao, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

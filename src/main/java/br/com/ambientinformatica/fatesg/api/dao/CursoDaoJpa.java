@@ -47,17 +47,14 @@ public class CursoDaoJpa extends PersistenciaJpa<Curso> implements CursoDao {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Curso> consultarPeloNome(String nome) {
 		Session session = this.em.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Curso.class);
-
+		
 		if (StringUtils.isNotBlank(nome)) {
-			criteria.add(Restrictions.ilike("nome", nome.toUpperCase(),
-					MatchMode.START));
+			criteria.add(Restrictions.ilike("nome", nome.toUpperCase(), MatchMode.START));
 		}
-		return criteria.list();
+			return criteria.list();
 	}
-
 }
