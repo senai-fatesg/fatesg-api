@@ -26,7 +26,7 @@ public class Avaliacao implements Serializable {
 	private Long id;
 	
 	@Enumerated(EnumType.STRING)
-	private EnumTipoAvaliacao tipoAvaliacao = EnumTipoAvaliacao.N1;
+	private EnumTipoAvaliacao tipoAvaliacao;
 	
 	private String criterio;
 	

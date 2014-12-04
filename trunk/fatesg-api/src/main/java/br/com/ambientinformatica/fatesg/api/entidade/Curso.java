@@ -27,10 +27,10 @@ public class Curso implements Serializable {
 	private String descricao;
 
 	@Enumerated(EnumType.STRING)
-	private EnumTurnoCurso turno = EnumTurnoCurso.MATUTINO;
+	private EnumTurnoCurso turno;
 
 	@Enumerated(EnumType.STRING)
-	private EnumModalidadeCurso modalidade = EnumModalidadeCurso.GRADUACAO;
+	private EnumModalidadeCurso modalidade;
 
 	private int cargaHoraria;
 
