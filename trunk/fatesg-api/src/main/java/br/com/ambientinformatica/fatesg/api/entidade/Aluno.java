@@ -203,132 +203,40 @@ public class Aluno implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
-		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
-		result = prime
-				* result
-				+ ((certificado2Grau == null) ? 0 : certificado2Grau.hashCode());
-		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
-		result = prime * result + ((cursos == null) ? 0 : cursos.hashCode());
-		result = prime * result
-				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((municipio == null) ? 0 : municipio.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result
-				+ ((reservista == null) ? 0 : reservista.hashCode());
-		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result
-				+ ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result
-				+ ((tipoSexo == null) ? 0 : tipoSexo.hashCode());
-		result = prime * result
-				+ ((tituloEleitor == null) ? 0 : tituloEleitor.hashCode());
-		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
-		return result;
-	}
+   public int hashCode() {
+	   final int prime = 31;
+	   int result = 1;
+	   result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
+	   result = prime * result + ((id == null) ? 0 : id.hashCode());
+	   return result;
+   }
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		if (celular == null) {
-			if (other.celular != null)
-				return false;
-		} else if (!celular.equals(other.celular))
-			return false;
-		if (cep == null) {
-			if (other.cep != null)
-				return false;
-		} else if (!cep.equals(other.cep))
-			return false;
-		if (certificado2Grau == null) {
-			if (other.certificado2Grau != null)
-				return false;
-		} else if (!certificado2Grau.equals(other.certificado2Grau))
-			return false;
-		if (cpfCnpj == null) {
-			if (other.cpfCnpj != null)
-				return false;
-		} else if (!cpfCnpj.equals(other.cpfCnpj))
-			return false;
-		if (cursos == null) {
-			if (other.cursos != null)
-				return false;
-		} else if (!cursos.equals(other.cursos))
-			return false;
-		if (disciplinas == null) {
-			if (other.disciplinas != null)
-				return false;
-		} else if (!disciplinas.equals(other.disciplinas))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (municipio == null) {
-			if (other.municipio != null)
-				return false;
-		} else if (!municipio.equals(other.municipio))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (reservista == null) {
-			if (other.reservista != null)
-				return false;
-		} else if (!reservista.equals(other.reservista))
-			return false;
-		if (rg == null) {
-			if (other.rg != null)
-				return false;
-		} else if (!rg.equals(other.rg))
-			return false;
-		if (status != other.status)
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
-			return false;
-		if (tipoSexo != other.tipoSexo)
-			return false;
-		if (tituloEleitor == null) {
-			if (other.tituloEleitor != null)
-				return false;
-		} else if (!tituloEleitor.equals(other.tituloEleitor))
-			return false;
-		if (uf == null) {
-			if (other.uf != null)
-				return false;
-		} else if (!uf.equals(other.uf))
-			return false;
-		return true;
-	}	
+   public boolean equals(Object obj) {
+	   if (this == obj)
+		   return true;
+	   if (obj == null)
+		   return false;
+	   if (getClass() != obj.getClass())
+		   return false;
+	   Aluno other = (Aluno) obj;
+	   if (cpfCnpj == null) {
+		   if (other.cpfCnpj != null)
+			   return false;
+	   } else if (!cpfCnpj.equals(other.cpfCnpj))
+		   return false;
+	   if (id == null) {
+		   if (other.id != null)
+			   return false;
+	   } else if (!id.equals(other.id))
+		   return false;
+	   return true;
+   }
+
+	@Override
+   public String toString() {
+	   return "Aluno [id=" + id + ", nome=" + nome + ", cpfCnpj=" + cpfCnpj+ "]";
+   }
+
+		
 }
