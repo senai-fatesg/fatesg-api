@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import br.com.ambientinformatica.corporativo.entidade.EnumUf;
 import br.com.ambientinformatica.corporativo.entidade.Municipio;
 
 @Entity
@@ -54,7 +55,7 @@ public class Aluno implements Serializable {
 	@ManyToOne
 	private Municipio municipio;
 
-	private String uf;
+	private EnumUf uf;
 
 	private String cep;
 
@@ -146,11 +147,11 @@ public class Aluno implements Serializable {
 		this.municipio = municipio;
 	}
 
-	public String getUf() {
+	public EnumUf getUf() {
 		return uf;
 	}
 
-	public void setUf(String uf) {
+	public void setUf(EnumUf uf) {
 		this.uf = uf;
 	}
 
