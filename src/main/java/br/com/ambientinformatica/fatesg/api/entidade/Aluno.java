@@ -55,6 +55,7 @@ public class Aluno implements Serializable {
 	@ManyToOne
 	private Municipio municipio;
 
+	@Enumerated(EnumType.STRING)
 	private EnumUf uf;
 
 	private String cep;
