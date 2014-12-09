@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
+import br.com.ambientinformatica.corporativo.entidade.Municipio;
 
 @Entity
 public class Aluno implements Serializable {
@@ -47,8 +50,9 @@ public class Aluno implements Serializable {
 	private String email;
 
 	private String endereco;
-
-	private String municipio;
+	
+	@ManyToOne
+	private Municipio municipio;
 
 	private String uf;
 
@@ -134,11 +138,11 @@ public class Aluno implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public String getMunicipio() {
+	public Municipio getMunicipio() {
 		return municipio;
 	}
 
-	public void setMunicipio(String municipio) {
+	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
 
