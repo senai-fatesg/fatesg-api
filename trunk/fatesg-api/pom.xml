@@ -41,21 +41,6 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
-			<artifactId>ambient-swing</artifactId>
-			<version>0.0.11</version>
-			<exclusions>
-				<exclusion>
-					<groupId>jasperreports</groupId>
-					<artifactId>jasperreports</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>br.com.ambientinformatica</groupId>
-					<artifactId>utilAmbient</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>ambient-corporativo</artifactId>
 			<version>1.0.7</version>
 		</dependency>
