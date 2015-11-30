@@ -1,12 +1,14 @@
 package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,11 +60,11 @@ public class Colaborador implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumTipoColaborador tipo;
 
-	@ManyToMany
-	private List<Curso> cursos;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Curso> cursos = new ArrayList<Curso>();
 	
-	@ManyToMany
-	private List<Disciplina> disciplinas;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	public String getNome() {
 		return nome;
