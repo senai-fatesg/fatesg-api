@@ -1,23 +1,27 @@
 package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.ambientinformatica.corporativo.entidade.EnumUf;
 import br.com.ambientinformatica.corporativo.entidade.Municipio;
 
 @Entity
+@XmlRootElement
 public class Aluno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +32,7 @@ public class Aluno implements Serializable {
 	private Long id;
 
 	private String nome;
-	
+
 	@Column(unique = true)
 	private String cpfCnpj;
 
@@ -39,7 +43,7 @@ public class Aluno implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private EnumStatusAluno status;
-	
+
 	private String tituloEleitor;
 
 	private String reservista;
@@ -51,7 +55,7 @@ public class Aluno implements Serializable {
 	private String email;
 
 	private String endereco;
-	
+
 	@ManyToOne
 	private Municipio municipio;
 
@@ -62,11 +66,11 @@ public class Aluno implements Serializable {
 
 	private String certificado2Grau;
 
-	@ManyToMany
-	private List<Curso> cursos;
-	
-	@ManyToMany
-	private List<Disciplina> disciplinas;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Curso> cursos = new ArrayList<Curso>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 
 	public String getNome() {
 		return nome;
@@ -209,40 +213,40 @@ public class Aluno implements Serializable {
 	}
 
 	@Override
-   public int hashCode() {
-	   final int prime = 31;
-	   int result = 1;
-	   result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
-	   result = prime * result + ((id == null) ? 0 : id.hashCode());
-	   return result;
-   }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
 	@Override
-   public boolean equals(Object obj) {
-	   if (this == obj)
-		   return true;
-	   if (obj == null)
-		   return false;
-	   if (getClass() != obj.getClass())
-		   return false;
-	   Aluno other = (Aluno) obj;
-	   if (cpfCnpj == null) {
-		   if (other.cpfCnpj != null)
-			   return false;
-	   } else if (!cpfCnpj.equals(other.cpfCnpj))
-		   return false;
-	   if (id == null) {
-		   if (other.id != null)
-			   return false;
-	   } else if (!id.equals(other.id))
-		   return false;
-	   return true;
-   }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (cpfCnpj == null) {
+			if (other.cpfCnpj != null)
+				return false;
+		} else if (!cpfCnpj.equals(other.cpfCnpj))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 	@Override
-   public String toString() {
-	   return "Aluno [id=" + id + ", nome=" + nome + ", cpfCnpj=" + cpfCnpj+ "]";
-   }
+	public String toString() {
+		return "Aluno [id=" + id + ", nome=" + nome + ", cpfCnpj=" + cpfCnpj
+				+ "]";
+	}
 
-		
 }

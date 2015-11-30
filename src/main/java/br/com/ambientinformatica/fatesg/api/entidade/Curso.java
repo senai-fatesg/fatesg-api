@@ -1,6 +1,7 @@
 package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Curso implements Serializable {
 
@@ -49,13 +52,13 @@ public class Curso implements Serializable {
 	private UnidadeEnsino unidadeEnsino;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
-	private List<Matriz> matriz;
+	private List<Matriz> matriz = new ArrayList<Matriz>();
 
-	@ManyToMany(mappedBy="cursos")
-	private List<Aluno> alunos;
+	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY)
+	private List<Aluno> alunos = new ArrayList<Aluno>();
 
-	@ManyToMany(mappedBy="cursos")
-	private List<Colaborador> colaboradores;
+	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY)
+	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
 	public String getId() {
 		return id;

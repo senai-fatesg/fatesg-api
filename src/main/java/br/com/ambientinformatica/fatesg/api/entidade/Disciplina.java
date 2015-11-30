@@ -1,6 +1,7 @@
 package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,33 +9,35 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-public class Disciplina implements Serializable{
+@XmlRootElement
+public class Disciplina implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
-	
+
 	private String nome;
-	
+
 	private int cargaHoraria;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
-	private List<CronogramaAula> cronogramas;
-	
+	private List<CronogramaAula> cronogramas = new ArrayList<CronogramaAula>();
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
-	private List<Avaliacao> avaliacoes;
-	
-	@ManyToMany(mappedBy="disciplinas")
-	private List<Aluno> alunos;
-	
-	@ManyToMany(mappedBy="disciplinas")
-	private List<Colaborador> colaboradores;	
-	
-	@ManyToMany(mappedBy="disciplinas")
-	private List<Matriz> matrizes;
+	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
+	private List<Aluno> alunos = new ArrayList<Aluno>();
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
+	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
+	private List<Matriz> matrizes = new ArrayList<Matriz>();
 
 	public String getId() {
 		return id;
