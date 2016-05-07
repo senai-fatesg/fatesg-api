@@ -16,10 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Curso implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,12 +55,15 @@ public class Curso implements Serializable {
 	@JoinColumn(name = "unidadeEnsino_id")
 	private UnidadeEnsino unidadeEnsino;
 
+	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
 	private List<Matriz> matriz = new ArrayList<Matriz>();
 
+	@XmlTransient
 	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY)
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
+	@XmlTransient
 	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY)
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 

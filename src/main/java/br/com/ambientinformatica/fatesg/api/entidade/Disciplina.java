@@ -9,10 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Disciplina implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,18 +28,23 @@ public class Disciplina implements Serializable {
 
 	private int cargaHoraria;
 
+	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
 	private List<CronogramaAula> cronogramas = new ArrayList<CronogramaAula>();
 
+	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
 	private List<Matriz> matrizes = new ArrayList<Matriz>();
 

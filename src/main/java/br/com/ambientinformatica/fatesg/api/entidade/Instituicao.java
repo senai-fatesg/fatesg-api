@@ -11,10 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Instituicao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +38,7 @@ public class Instituicao implements Serializable {
 
 	private String descricao;
 
+	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instituicao")
 	private List<UnidadeEnsino> unidades = new ArrayList<UnidadeEnsino>();
 
