@@ -2,7 +2,9 @@ package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +16,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Colaborador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -60,12 +66,14 @@ public class Colaborador implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumTipoColaborador tipo;
 
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Curso> cursos = new ArrayList<Curso>();
-	
+	private Set<Curso> cursos = new HashSet<Curso>();
+
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -188,6 +196,22 @@ public class Colaborador implements Serializable {
 
 	public void setTipo(EnumTipoColaborador tipo) {
 		this.tipo = tipo;
+	}
+
+	public Set<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(HashSet<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	@Override

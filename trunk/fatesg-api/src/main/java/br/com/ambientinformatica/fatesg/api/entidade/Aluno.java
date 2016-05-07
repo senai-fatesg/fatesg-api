@@ -15,13 +15,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.ambientinformatica.corporativo.entidade.EnumUf;
 import br.com.ambientinformatica.corporativo.entidade.Municipio;
 
 @Entity
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Aluno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -66,9 +70,11 @@ public class Aluno implements Serializable {
 
 	private String certificado2Grau;
 
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Curso> cursos = new ArrayList<Curso>();
 
+	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 
