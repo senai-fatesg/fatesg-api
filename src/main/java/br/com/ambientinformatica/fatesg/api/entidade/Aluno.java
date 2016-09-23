@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,6 +47,7 @@ public class Aluno implements Serializable {
 	private EnumTipoSexo tipoSexo;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull(message="É necessário o preenchimento do campo status")
 	private EnumStatusAluno status;
 
 	private String tituloEleitor;
