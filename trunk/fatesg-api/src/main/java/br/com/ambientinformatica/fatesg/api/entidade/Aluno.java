@@ -63,9 +63,11 @@ public class Aluno implements Serializable {
 	private String endereco;
 
 	@ManyToOne
+	@NotNull(message="É necessário o preenchimento do campo município")
 	private Municipio municipio;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull(message="É necessário o preenchimento do campo UF")
 	private EnumUf uf;
 
 	private String cep;
