@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -29,7 +34,11 @@ public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	@GeneratedValue(generator="curso_seq", strategy=GenerationType.SEQUENCE )
+	@SequenceGenerator(name="curso_seq", sequenceName="curso_seq", initialValue=1, allocationSize=1)
+	private Integer id;
+	
+	private String codigo;
 
 	private String descricao;
 
@@ -56,24 +65,16 @@ public class Curso implements Serializable {
 	private UnidadeEnsino unidadeEnsino;
 
 	@XmlTransient
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Matriz> matriz = new ArrayList<Matriz>();
 
 	@XmlTransient
-	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	@XmlTransient
-	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy="cursos", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public int getCargaHoraria() {
 		return cargaHoraria;
@@ -171,29 +172,32 @@ public class Curso implements Serializable {
 		this.modalidade = modalidade;
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
 		result = prime * result + cargaHoraria;
-		result = prime * result
-				+ ((colaboradores == null) ? 0 : colaboradores.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result
-				+ ((dtInicio == null) ? 0 : dtInicio.hashCode());
-		result = prime * result
-				+ ((dtTermino == null) ? 0 : dtTermino.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((dtInicio == null) ? 0 : dtInicio.hashCode());
+		result = prime * result + ((dtTermino == null) ? 0 : dtTermino.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((matriz == null) ? 0 : matriz.hashCode());
-		result = prime * result
-				+ ((modalidade == null) ? 0 : modalidade.hashCode());
+		result = prime * result + ((modalidade == null) ? 0 : modalidade.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
-		result = prime * result + ((turno == null) ? 0 : turno.hashCode());
-		result = prime * result
-				+ ((unidadeEnsino == null) ? 0 : unidadeEnsino.hashCode());
 		return result;
 	}
 
@@ -206,17 +210,12 @@ public class Curso implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Curso other = (Curso) obj;
-		if (alunos == null) {
-			if (other.alunos != null)
-				return false;
-		} else if (!alunos.equals(other.alunos))
-			return false;
 		if (cargaHoraria != other.cargaHoraria)
 			return false;
-		if (colaboradores == null) {
-			if (other.colaboradores != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!colaboradores.equals(other.colaboradores))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
@@ -255,25 +254,15 @@ public class Curso implements Serializable {
 				return false;
 		} else if (!sigla.equals(other.sigla))
 			return false;
-		if (turno != other.turno)
-			return false;
-		if (unidadeEnsino == null) {
-			if (other.unidadeEnsino != null)
-				return false;
-		} else if (!unidadeEnsino.equals(other.unidadeEnsino))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Curso [id=" + id + ", descricao=" + descricao + ", turno="
-				+ turno + ", modalidade=" + modalidade + ", cargaHoraria="
-				+ cargaHoraria + ", nome=" + nome + ", sigla=" + sigla
-				+ ", dtInicio=" + dtInicio + ", dtTermino=" + dtTermino
-				+ ", unidadeEnsino=" + unidadeEnsino + ", matriz=" + matriz
-				+ ", alunos=" + alunos + ", colaboradores=" + colaboradores
-				+ "]";
+		return "Curso [id=" + id + ", codigo=" + codigo + ", descricao=" + descricao + ", turno=" + turno + ", nome="
+				+ nome + ", sigla=" + sigla + "]";
 	}
+	
+	
 
 }
