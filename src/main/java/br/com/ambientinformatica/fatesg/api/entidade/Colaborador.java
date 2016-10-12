@@ -68,7 +68,7 @@ public class Colaborador implements Serializable {
 
 	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
-	private Set<Curso> cursos = new HashSet<Curso>();
+	private List<Curso> cursos = new ArrayList<Curso>();
 
 	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -198,11 +198,11 @@ public class Colaborador implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Set<Curso> getCursos() {
+	public List<Curso> getCursos() {
 		return cursos;
 	}
 
-	public void setCursos(HashSet<Curso> cursos) {
+	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
 	}
 
