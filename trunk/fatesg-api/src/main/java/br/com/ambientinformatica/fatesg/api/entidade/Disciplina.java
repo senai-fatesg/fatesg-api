@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,39 +27,37 @@ public class Disciplina implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	@GeneratedValue(generator="disciplina_seq", strategy=GenerationType.SEQUENCE )
+	@SequenceGenerator(name="disciplina_seq", sequenceName="disciplina_seq", initialValue=1, allocationSize=1)
+	private Integer id;
 
+	private String codigo;
+	
 	private String nome;
 
 	private int cargaHoraria;
 
 	@XmlTransient
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<CronogramaAula> cronogramas = new ArrayList<CronogramaAula>();
 
 	@XmlTransient
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina", cascade=CascadeType.ALL)
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 
 	@XmlTransient
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas", cascade=CascadeType.ALL)
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	@XmlTransient
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas", cascade=CascadeType.ALL)
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
 	@XmlTransient
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas", cascade=CascadeType.ALL)
 	private List<Matriz> matrizes = new ArrayList<Matriz>();
 
-	public String getId() {
-		return id;
-	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -95,18 +98,29 @@ public class Disciplina implements Serializable {
 	public void setMatrizes(List<Matriz> matrizes) {
 		this.matrizes = matrizes;
 	}
+	
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
 		result = prime * result + cargaHoraria;
-		result = prime * result
-				+ ((colaboradores == null) ? 0 : colaboradores.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((matrizes == null) ? 0 : matrizes.hashCode());
+		result = prime * result + ((matrizes == null) ? 0 : matrizes.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -120,17 +134,14 @@ public class Disciplina implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Disciplina other = (Disciplina) obj;
-		if (alunos == null) {
-			if (other.alunos != null)
-				return false;
-		} else if (!alunos.equals(other.alunos))
-			return false;
+
 		if (cargaHoraria != other.cargaHoraria)
 			return false;
-		if (colaboradores == null) {
-			if (other.colaboradores != null)
+		
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!colaboradores.equals(other.colaboradores))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		if (id == null) {
 			if (other.id != null)
