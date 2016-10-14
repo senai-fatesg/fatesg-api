@@ -2,9 +2,7 @@ package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,16 +13,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import br.com.ambientinformatica.util.AmbientValidator;
+import br.com.ambientinformatica.util.Entidade;
+
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Colaborador implements Serializable {
+public class Colaborador extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -55,15 +58,16 @@ public class Colaborador implements Serializable {
 
 	private String endereco;
 
-	private String municipio;
-
-	private String uf;
-
 	private String cep;
 
 	private String historico;
+	
+	@ManyToOne(optional=false)
+   @NotNull(message="Informe o municipio", groups=AmbientValidator.class)
+	private Municipio municipio;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull(message="Informe o tipo", groups=AmbientValidator.class)
 	private EnumTipoColaborador tipo;
 
 	@XmlTransient
@@ -77,269 +81,101 @@ public class Colaborador implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getCpfCnpj() {
 		return cpfCnpj;
 	}
-
 	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
-
 	public String getRg() {
 		return rg;
 	}
-
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-
 	public String getTituloEleitor() {
 		return tituloEleitor;
 	}
-
 	public void setTituloEleitor(String tituloEleitor) {
 		this.tituloEleitor = tituloEleitor;
 	}
-
 	public String getReservista() {
 		return reservista;
 	}
-
 	public void setReservista(String reservista) {
 		this.reservista = reservista;
 	}
-
 	public String getTelefone() {
 		return telefone;
 	}
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 	public String getCelular() {
 		return celular;
 	}
-
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getEndereco() {
 		return endereco;
 	}
-
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	public String getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(String municipio) {
-		this.municipio = municipio;
-	}
-
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
 	public String getCep() {
 		return cep;
 	}
-
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
 	public String getHistorico() {
 		return historico;
 	}
-
 	public void setHistorico(String historico) {
 		this.historico = historico;
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public EnumTipoSexo getTipoSexo() {
 		return tipoSexo;
 	}
-
 	public EnumTipoColaborador getTipo() {
 		return tipo;
 	}
-
 	public void setTipoSexo(EnumTipoSexo tipoSexo) {
 		this.tipoSexo = tipoSexo;
 	}
-
 	public void setTipo(EnumTipoColaborador tipo) {
 		this.tipo = tipo;
 	}
-
 	public List<Curso> getCursos() {
 		return cursos;
 	}
-
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
 	}
-
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
-
 	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
-		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
-		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
-		result = prime * result + ((cursos == null) ? 0 : cursos.hashCode());
-		result = prime * result
-				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result
-				+ ((historico == null) ? 0 : historico.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((municipio == null) ? 0 : municipio.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result
-				+ ((reservista == null) ? 0 : reservista.hashCode());
-		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
-		result = prime * result
-				+ ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		result = prime * result
-				+ ((tipoSexo == null) ? 0 : tipoSexo.hashCode());
-		result = prime * result
-				+ ((tituloEleitor == null) ? 0 : tituloEleitor.hashCode());
-		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
-		return result;
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Colaborador other = (Colaborador) obj;
-		if (celular == null) {
-			if (other.celular != null)
-				return false;
-		} else if (!celular.equals(other.celular))
-			return false;
-		if (cep == null) {
-			if (other.cep != null)
-				return false;
-		} else if (!cep.equals(other.cep))
-			return false;
-		if (cpfCnpj == null) {
-			if (other.cpfCnpj != null)
-				return false;
-		} else if (!cpfCnpj.equals(other.cpfCnpj))
-			return false;
-		if (cursos == null) {
-			if (other.cursos != null)
-				return false;
-		} else if (!cursos.equals(other.cursos))
-			return false;
-		if (disciplinas == null) {
-			if (other.disciplinas != null)
-				return false;
-		} else if (!disciplinas.equals(other.disciplinas))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (historico == null) {
-			if (other.historico != null)
-				return false;
-		} else if (!historico.equals(other.historico))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (municipio == null) {
-			if (other.municipio != null)
-				return false;
-		} else if (!municipio.equals(other.municipio))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (reservista == null) {
-			if (other.reservista != null)
-				return false;
-		} else if (!reservista.equals(other.reservista))
-			return false;
-		if (rg == null) {
-			if (other.rg != null)
-				return false;
-		} else if (!rg.equals(other.rg))
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
-			return false;
-		if (tipo != other.tipo)
-			return false;
-		if (tipoSexo != other.tipoSexo)
-			return false;
-		if (tituloEleitor == null) {
-			if (other.tituloEleitor != null)
-				return false;
-		} else if (!tituloEleitor.equals(other.tituloEleitor))
-			return false;
-		if (uf == null) {
-			if (other.uf != null)
-				return false;
-		} else if (!uf.equals(other.uf))
-			return false;
-		return true;
-	}
 }
