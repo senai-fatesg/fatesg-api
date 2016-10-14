@@ -21,13 +21,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import br.com.ambientinformatica.corporativo.entidade.EnumUf;
-import br.com.ambientinformatica.corporativo.entidade.Municipio;
+import br.com.ambientinformatica.util.AmbientValidator;
+import br.com.ambientinformatica.util.Entidade;
+
+
 
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Aluno implements Serializable {
+public class Aluno extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +49,7 @@ public class Aluno implements Serializable {
 	private EnumTipoSexo tipoSexo;
 
 	@Enumerated(EnumType.STRING)
-	@NotNull(message="É necessário o preenchimento do campo status")
+	@NotNull(message="Campo status requerido")
 	private EnumStatusAluno status;
 
 	private String tituloEleitor;
@@ -62,13 +64,9 @@ public class Aluno implements Serializable {
 
 	private String endereco;
 
-	@ManyToOne
-	@NotNull(message="É necessário o preenchimento do campo município")
+	@ManyToOne(optional=false)
+   @NotNull(message="Informe o municipio", groups=AmbientValidator.class)
 	private Municipio municipio;
-
-	@Enumerated(EnumType.STRING)
-	@NotNull(message="É necessário o preenchimento do campo UF")
-	private EnumUf uf;
 
 	private String cep;
 
@@ -162,14 +160,6 @@ public class Aluno implements Serializable {
 		this.municipio = municipio;
 	}
 
-	public EnumUf getUf() {
-		return uf;
-	}
-
-	public void setUf(EnumUf uf) {
-		this.uf = uf;
-	}
-
 	public String getCep() {
 		return cep;
 	}
@@ -220,37 +210,6 @@ public class Aluno implements Serializable {
 
 	public void setStatus(EnumStatusAluno status) {
 		this.status = status;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		if (cpfCnpj == null) {
-			if (other.cpfCnpj != null)
-				return false;
-		} else if (!cpfCnpj.equals(other.cpfCnpj))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package br.com.ambientinformatica.fatesg.api.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,26 +20,47 @@ import javax.persistence.TemporalType;
 public class Matriz implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(generator = "matriz_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "matriz_seq", sequenceName = "matriz_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
-	
+
 	private String descricao;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new Date();
-	
+
 	private int qtdPeriodos;
-	
+
 	@ManyToOne
 	@JoinColumn(name="id_curso")
 	private Curso curso;
-	
+
 	@ManyToMany
-	private List<Disciplina> disciplinas;
-	
+	private List<Disciplina> disciplinas = new ArrayList<>();
+
+	public void add(Disciplina disciplina){
+		if(!this.disciplinas.contains(disciplina)){
+			this.disciplinas.add(disciplina);
+		}
+	}
+
+	public void remover(Disciplina disciplina) {
+		if(this.disciplinas.contains(disciplina)){
+			this.disciplinas.remove(disciplina);
+		}
+	}
+
+	//TODO rever nescessidade do metodo
+	public boolean isContemDisciplina(Disciplina disciplina){
+		if(disciplinas != null){
+			return disciplinas.contains(disciplina);
+		}else{
+			return false;
+		}
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
