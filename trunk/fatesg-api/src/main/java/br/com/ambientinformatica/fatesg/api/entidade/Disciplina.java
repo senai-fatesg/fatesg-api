@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,10 +17,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import br.com.ambientinformatica.util.Entidade;
+
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Disciplina implements Serializable {
+public class Disciplina extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,23 +38,23 @@ public class Disciplina implements Serializable {
 	private int cargaHoraria;
 
 	@XmlTransient
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
 	private List<CronogramaAula> cronogramas = new ArrayList<CronogramaAula>();
 
 	@XmlTransient
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "disciplina")
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 
 	@XmlTransient
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas", cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	@XmlTransient
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas", cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
 	@XmlTransient
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas", cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "disciplinas")
 	private List<Matriz> matrizes = new ArrayList<Matriz>();
 
 
@@ -112,52 +112,4 @@ public class Disciplina implements Serializable {
 		return id;
 	}
 	
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cargaHoraria;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((matrizes == null) ? 0 : matrizes.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Disciplina other = (Disciplina) obj;
-
-		if (cargaHoraria != other.cargaHoraria)
-			return false;
-		
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (matrizes == null) {
-			if (other.matrizes != null)
-				return false;
-		} else if (!matrizes.equals(other.matrizes))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}
 }
