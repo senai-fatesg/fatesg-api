@@ -16,8 +16,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.ambientinformatica.util.Entidade;
+
 @Entity
-public class Matriz implements Serializable {
+public class Matriz extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -51,16 +53,7 @@ public class Matriz implements Serializable {
 			this.disciplinas.remove(disciplina);
 		}
 	}
-
-	//TODO rever nescessidade do metodo
-	public boolean isContemDisciplina(Disciplina disciplina){
-		if(disciplinas != null){
-			return disciplinas.contains(disciplina);
-		}else{
-			return false;
-		}
-	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -105,57 +98,4 @@ public class Matriz implements Serializable {
 		return id;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result
-				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + qtdPeriodos;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Matriz other = (Matriz) obj;
-		if (curso == null) {
-			if (other.curso != null)
-				return false;
-		} else if (!curso.equals(other.curso))
-			return false;
-		if (data == null) {
-			if (other.data != null)
-				return false;
-		} else if (!data.equals(other.data))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (disciplinas == null) {
-			if (other.disciplinas != null)
-				return false;
-		} else if (!disciplinas.equals(other.disciplinas))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (qtdPeriodos != other.qtdPeriodos)
-			return false;
-		return true;
-	}	
 }

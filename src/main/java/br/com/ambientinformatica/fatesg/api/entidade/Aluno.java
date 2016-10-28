@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.ambientinformatica.util.AmbientValidator;
 import br.com.ambientinformatica.util.Entidade;
+import br.com.ambientinformatica.util.UtilCpf;
 
 
 
@@ -49,8 +50,7 @@ public class Aluno extends Entidade implements Serializable {
 	private EnumTipoSexo tipoSexo;
 
 	@Enumerated(EnumType.STRING)
-	@NotNull(message="Campo status requerido")
-	private EnumStatusAluno status;
+	private EnumStatusAluno status = EnumStatusAluno.ATIVO;
 
 	private String tituloEleitor;
 
@@ -65,7 +65,7 @@ public class Aluno extends Entidade implements Serializable {
 	private String endereco;
 
 	@ManyToOne(optional=false)
-   @NotNull(message="Informe o municipio", groups=AmbientValidator.class)
+	@NotNull(message="Informe o municipio", groups=AmbientValidator.class)
 	private Municipio municipio;
 
 	private String cep;
@@ -210,12 +210,6 @@ public class Aluno extends Entidade implements Serializable {
 
 	public void setStatus(EnumStatusAluno status) {
 		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return "Aluno [id=" + id + ", nome=" + nome + ", cpfCnpj=" + cpfCnpj
-				+ "]";
 	}
 
 }
