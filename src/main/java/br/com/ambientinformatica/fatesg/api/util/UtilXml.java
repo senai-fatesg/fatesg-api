@@ -1,8 +1,8 @@
 package br.com.ambientinformatica.fatesg.api.util;
 
-import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
-
 import com.thoughtworks.xstream.XStream;
+
+import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 
 public class UtilXml {
 

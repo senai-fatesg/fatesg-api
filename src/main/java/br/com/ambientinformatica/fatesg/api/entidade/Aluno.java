@@ -23,7 +23,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.ambientinformatica.util.AmbientValidator;
 import br.com.ambientinformatica.util.Entidade;
-import br.com.ambientinformatica.util.UtilCpf;
 
 
 
