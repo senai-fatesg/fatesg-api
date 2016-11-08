@@ -16,17 +16,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import br.com.ambientinformatica.util.Entidade;
+
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Instituicao implements Serializable {
+public class Instituicao extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "instituicao_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "instituicao_seq", sequenceName = "instituicao_seq", allocationSize = 1, initialValue = 1)
-	private Long id;
+	private Integer id;
+	
+	private Integer chaveInstituicaoCorporatum;
 
 	private String nomeFantasia;
 
@@ -90,76 +94,16 @@ public class Instituicao implements Serializable {
 		this.unidades = unidades;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime
-				* result
-				+ ((inscricaoEstadual == null) ? 0 : inscricaoEstadual
-						.hashCode());
-		result = prime * result
-				+ ((nomeFantasia == null) ? 0 : nomeFantasia.hashCode());
-		result = prime * result
-				+ ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
-		result = prime * result
-				+ ((unidades == null) ? 0 : unidades.hashCode());
-		return result;
+	public Integer getChaveInstituicaoCorporatum() {
+		return chaveInstituicaoCorporatum;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Instituicao other = (Instituicao) obj;
-		if (cnpj == null) {
-			if (other.cnpj != null)
-				return false;
-		} else if (!cnpj.equals(other.cnpj))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (inscricaoEstadual == null) {
-			if (other.inscricaoEstadual != null)
-				return false;
-		} else if (!inscricaoEstadual.equals(other.inscricaoEstadual))
-			return false;
-		if (nomeFantasia == null) {
-			if (other.nomeFantasia != null)
-				return false;
-		} else if (!nomeFantasia.equals(other.nomeFantasia))
-			return false;
-		if (razaoSocial == null) {
-			if (other.razaoSocial != null)
-				return false;
-		} else if (!razaoSocial.equals(other.razaoSocial))
-			return false;
-		if (unidades == null) {
-			if (other.unidades != null)
-				return false;
-		} else if (!unidades.equals(other.unidades))
-			return false;
-		return true;
+	public void setChaveInstituicaoCorporatum(Integer chaveInstituicaoCorporatum) {
+		this.chaveInstituicaoCorporatum = chaveInstituicaoCorporatum;
 	}
 
 }
