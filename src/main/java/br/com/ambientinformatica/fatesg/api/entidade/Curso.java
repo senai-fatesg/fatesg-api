@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import br.com.ambientinformatica.util.Entidade;
+
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Curso implements Serializable {
+public class Curso extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +38,8 @@ public class Curso implements Serializable {
 	@GeneratedValue(generator="curso_seq", strategy=GenerationType.SEQUENCE )
 	@SequenceGenerator(name="curso_seq", sequenceName="curso_seq", initialValue=1, allocationSize=1)
 	private Integer id;
+	
+	private Integer chaveCursoCorporatum;
 	
 	private String codigo;
 
@@ -183,85 +187,12 @@ public class Curso implements Serializable {
 		return id;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cargaHoraria;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((dtInicio == null) ? 0 : dtInicio.hashCode());
-		result = prime * result + ((dtTermino == null) ? 0 : dtTermino.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((matriz == null) ? 0 : matriz.hashCode());
-		result = prime * result + ((modalidade == null) ? 0 : modalidade.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
-		return result;
+	public Integer getChaveCursoCorporatum() {
+		return chaveCursoCorporatum;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Curso other = (Curso) obj;
-		if (cargaHoraria != other.cargaHoraria)
-			return false;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (dtInicio == null) {
-			if (other.dtInicio != null)
-				return false;
-		} else if (!dtInicio.equals(other.dtInicio))
-			return false;
-		if (dtTermino == null) {
-			if (other.dtTermino != null)
-				return false;
-		} else if (!dtTermino.equals(other.dtTermino))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (matriz == null) {
-			if (other.matriz != null)
-				return false;
-		} else if (!matriz.equals(other.matriz))
-			return false;
-		if (modalidade != other.modalidade)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (sigla == null) {
-			if (other.sigla != null)
-				return false;
-		} else if (!sigla.equals(other.sigla))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Curso [id=" + id + ", codigo=" + codigo + ", descricao=" + descricao + ", turno=" + turno + ", nome="
-				+ nome + ", sigla=" + sigla + "]";
+	public void setChaveCursoCorporatum(Integer chaveCursoCorporatum) {
+		this.chaveCursoCorporatum = chaveCursoCorporatum;
 	}
 	
-	
-
 }

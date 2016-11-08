@@ -30,6 +30,8 @@ public class Disciplina extends Entidade implements Serializable {
 	@GeneratedValue(generator="disciplina_seq", strategy=GenerationType.SEQUENCE )
 	@SequenceGenerator(name="disciplina_seq", sequenceName="disciplina_seq", initialValue=1, allocationSize=1)
 	private Integer id;
+	
+	private Integer chaveDisciplinaCorporatum;
 
 	private String codigo;
 	
@@ -110,6 +112,14 @@ public class Disciplina extends Entidade implements Serializable {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public Integer getChaveDisciplinaCorporatum() {
+		return chaveDisciplinaCorporatum;
+	}
+
+	public void setChaveDisciplinaCorporatum(Integer chaveDisciplinaCorporatum) {
+		this.chaveDisciplinaCorporatum = chaveDisciplinaCorporatum;
 	}
 	
 }
