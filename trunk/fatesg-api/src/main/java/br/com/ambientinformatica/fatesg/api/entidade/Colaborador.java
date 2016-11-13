@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -43,7 +44,12 @@ public class Colaborador extends Entidade implements Serializable {
 	@GeneratedValue(generator = "colaborador_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "colaborador_seq", sequenceName = "colaborador_seq", allocationSize = 1, initialValue = 1)
 	private Integer id;
-
+	
+	private Integer idColaboradorPai;
+	
+	@Transient
+	private Colaborador colaboradorPai;
+	
 	private String nome;
 
 	private String senha;
@@ -195,6 +201,24 @@ public class Colaborador extends Entidade implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+	
+	public Integer getIdColaboradorPai(){
+		return idColaboradorPai;
+	}
+	
+	public void setIdColaboradorPai(Integer idPai){
+		this.idColaboradorPai = idPai;
+	}
+	
+	public void setColaboradorPai(Colaborador colabPai){
+		this.colaboradorPai = colabPai;
+	}
+	
+	public Colaborador getColaboradorPai(){
+		return this.colaboradorPai;
+	}
+	
+	
 	public EnumTipoSexo getTipoSexo() {
 		return tipoSexo;
 	}
@@ -215,6 +239,10 @@ public class Colaborador extends Entidade implements Serializable {
 	}
 	public void setSenhaNaoCriptografada(String senha) {
 		this.senha = UtilHash.gerarStringHash(senha, Algoritimo.MD5);
+	}
+	
+	public void setSenhaCriptografada(String senha){
+		this.senha = senha;
 	}
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
