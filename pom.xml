@@ -3,7 +3,7 @@
 		<groupId>br.com.ambientinformatica.fatesg</groupId>
 		<artifactId>fatesg-api</artifactId>
 		<packaging>jar</packaging>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<name>fatesg-api</name>
 		<url>http://solutioin.com</url>
 
