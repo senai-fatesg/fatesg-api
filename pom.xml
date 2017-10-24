@@ -122,11 +122,11 @@
 				</executions>
 			</plugin>
 
-			<!-- start HSQLDB before -->
 			<plugin>
 				<groupId>fr.avianey.mojo</groupId>
 				<artifactId>hsqldb-maven-plugin</artifactId>
 				<executions>
+					<!-- start HSQLDB before -->
 					<execution>
 						<id>start-hsqldb</id>
 						<phase>pre-integration-test</phase>
@@ -134,13 +134,7 @@
 							<goal>start</goal>
 						</goals>
 					</execution>
-				</executions>
-			</plugin>
-			<!-- stop HSQLDB after -->
-			<plugin>
-				<groupId>fr.avianey.mojo</groupId>
-				<artifactId>hsqldb-maven-plugin</artifactId>
-				<executions>
+					<!-- stop HSQLDB after -->
 					<execution>
 						<id>stop-hsqldb</id>
 						<phase>post-integration-test</phase>
@@ -150,7 +144,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
